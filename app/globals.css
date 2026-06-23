@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Colores de marca Quanty ── */
+  --color-primary: #2ba9f7;     /* azul principal */
+  --color-accent:  #18b8cc;     /* cyan acento */
+  --color-dark:    #0b1c2d;     /* navy oscuro */
+  --color-light:   #f4f6f8;     /* gris claro */
+  --color-muted:   #6b7280;     /* gris texto */
+  --color-success: #2ecc71;   /* verde de marca: ✓, estados positivos */
+
+  /* ── Fuentes ── */
+  --font-heading: var(--font-inter);       /* títulos */
+  --font-body:    var(--font-montserrat);  /* cuerpo */
+}
+
+/* Suaviza el scroll y la tipografía base */
+html { scroll-behavior: smooth; }
+body { -webkit-font-smoothing: antialiased; }

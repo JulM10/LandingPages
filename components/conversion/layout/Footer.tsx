@@ -1,0 +1,44 @@
+import Image from "next/image"
+
+export function Footer({ nombre, contacts, isologoSrc }: {
+  nombre?: string;
+  contacts?: { label: string; href: string }[];
+  isologoSrc?: string;
+}) {
+  return (
+    <footer className="bg-dark py-10 px-[6%] border-t border-white/10">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="flex items-center gap-3">
+          {isologoSrc && <Image src={isologoSrc} alt={nombre || "Quanty Ads"} className="h-8 w-8" width={500} height={350} />}
+          <p className="text-sm text-white/40">© {new Date().getFullYear()} {nombre || "Quanty Ads"}</p>
+        </div>
+        {contacts && (
+          <div className="flex flex-col md:flex-row gap-2 md:gap-6">
+            {contacts.map((contact) => (
+              <a
+                key={contact.label}
+                href={contact.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-white/50 hover:text-primary transition"
+              >
+                {contact.label}
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+      <p className="text-center text-xs text-white/30 mt-6">
+        Desarrollado por{" "}
+        <a
+          href="https://instagram.com/quanty.ads"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-white/50 hover:text-primary transition font-medium"
+        >
+          Quanty Ads Team
+        </a>
+      </p>
+    </footer>
+  );
+}
