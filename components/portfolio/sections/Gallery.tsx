@@ -60,17 +60,17 @@ export function Gallery({
               onClick={() => trackFeatureInteraction('view', project.title, 0)}
               className="group relative aspect-square sm:aspect-video overflow-hidden rounded-lg"
             >
-              {/* Image */}
+              {/* Image - Zoom on desktop hover, static on mobile */}
               <Image
                 src={project.image}
                 alt={project.title}
                 fill
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                className="w-full h-full object-cover scale-100 md:group-hover:scale-110 transition-transform duration-500"
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               />
 
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-dark/0 group-hover:bg-dark/60 transition-colors duration-300 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              {/* Overlay - Visible on mobile, hover on desktop */}
+              <div className="absolute inset-0 bg-dark/60 md:bg-dark/0 md:group-hover:bg-dark/60 flex flex-col items-center justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300">
                 <h3 className="font-bold text-white text-lg sm:text-xl text-center px-4">
                   {project.title}
                 </h3>

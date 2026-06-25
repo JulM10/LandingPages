@@ -20,11 +20,13 @@ export interface PortfolioHeroConfig {
   };
 }
 
-// Service Card - With image and description
+// Service Card - With image, description and details for expansion
 export interface PortfolioService {
   image: string;
   title: string;
   description: string;
+  details?: string; // Información detallada al expandir
+  features?: string[]; // Features/beneficios
 }
 
 export interface PortfolioServicesConfig {
