@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAnalytics } from "@/lib/analytics";
 import { Button } from "../ui/Button";
 import type { HeaderConfig } from "@/types/minimal.config.types";
@@ -8,13 +8,32 @@ import type { HeaderConfig } from "@/types/minimal.config.types";
 export function Header({ logoSrc, nombre, links, textButton }:HeaderConfig) {
   const { trackCTAClick } = useAnalytics();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   const handleNavClick = (label: string, href: string) => {
     trackCTAClick(label, 'header_nav', href);
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-dark/80 backdrop-blur-md">
+    <header className={`fixed top-0 left-0 right-0 z-50 bg-dark/80 backdrop-blur-md transition-transform duration-300 ${
+      isVisible ? 'translate-y-0' : '-translate-y-full'
+    }`}>
       <div className="flex justify-between items-center py-4 px-[6%]">
         {logoSrc && <img src={logoSrc} alt={nombre ?? "Quanty Ads"} width={120} height={40} />}
         <nav className="hidden md:flex items-center gap-8">

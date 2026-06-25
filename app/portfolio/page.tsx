@@ -9,6 +9,7 @@ import { Process } from '@/components/portfolio/sections/Process';
 import { Testimonials } from '@/components/portfolio/sections/Testimonials';
 import { Contact } from '@/components/portfolio/sections/Contact';
 import { Cta } from '@/components/portfolio/sections/Cta';
+import { WhatsAppFloat } from '@/components/portfolio/layout/WhatsAppFloat';
 
 export default function PortfolioPage() {
   return (
@@ -42,6 +43,7 @@ export default function PortfolioPage() {
 
       {/* Sticky Bar */}
       <StickyBar {...portfolioConfig.stickyBar} />
+      <WhatsAppFloat {...portfolioConfig.whatsApp}/>
 
       {/* Footer */}
       <Footer {...portfolioConfig.footer} />

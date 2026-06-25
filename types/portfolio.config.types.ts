@@ -162,6 +162,10 @@ export interface PortfolioContactConfig {
   };
   submitButton: string;
 }
+export interface WhatsAppConfig {
+  message: string;
+  number: string;
+}
 
 // Full Portfolio Config
 export interface PortfolioPageConfig {
@@ -175,4 +179,5 @@ export interface PortfolioPageConfig {
   cta: PortfolioCTAConfig;
   footer: PortfolioFooterConfig;
   stickyBar: PortfolioStickyBarConfig;
+  whatsApp: WhatsAppConfig;
 }

@@ -40,7 +40,7 @@ export function Footer({
           {/* Contacts */}
           {contacts.length > 0 && (
             <div className="col-span-1">
-              <p className="font-semibold text-sm sm:text-base mb-3 sm:mb-4">
+              <p className="font-semibold text-sm sm:text-base mb-3 sm:mb-4 text-white">
                 Contacto
               </p>
               <div className="space-y-2">
@@ -68,7 +68,7 @@ export function Footer({
           {/* Social */}
           {socialLinks.length > 0 && (
             <div className="col-span-1 sm:col-span-2 lg:col-span-1">
-              <p className="font-semibold text-sm sm:text-base mb-3 sm:mb-4">
+              <p className="font-semibold text-sm sm:text-base mb-3 sm:mb-4 text-white">
                 Síguenos
               </p>
               <div className="flex gap-3">
@@ -92,9 +92,20 @@ export function Footer({
         </div>
 
         {/* Divider */}
-        <div className="border-t border-white/10 pt-6 sm:pt-8">
-          <p className="text-center text-xs sm:text-sm text-white/40">
+        <div className="border-t border-white/10 pt-6 sm:pt-8 text-center space-y-2">
+          <p className="text-xs sm:text-sm text-white/40">
             © {copyrightYear} {siteName}. Todos los derechos reservados.
+          </p>
+          <p className="text-xs sm:text-sm text-white/40">
+            Powered by{' '}
+            <a
+              href="https://maderowebs.com.ar"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/60 hover:text-primary transition font-semibold"
+            >
+              Julio Madero
+            </a>
           </p>
         </div>
       </div>

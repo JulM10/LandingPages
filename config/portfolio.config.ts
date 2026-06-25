@@ -1,15 +1,25 @@
 import type { PortfolioPageConfig } from '@/types/portfolio.config.types';
 
+
+const nombre = "Deep Weel Service";
+const mail = "quantyads@gmail.com";
+const numero = "+54 9 3584296560";
+const instagram = "quantyads"
+const facebook = "quantyads"
+const twitter = "quantyads"
+const linkedin = "quantyads"
+const whatsappMessage = "Hola, quiero más información sobre sus servicios.";
+
 // OPCIÓN 1: Hero con IMAGEN (Activa)
 export const portfolioConfig: PortfolioPageConfig = {
   header: {
     logo: '/icon.png',
-    siteName: 'Deep Weel Service',
+    siteName: nombre,
     navLinks: [
       { label: 'Proyectos', href: '#gallery' },
       { label: 'Servicios', href: '#services' },
       { label: 'Proceso', href: '#process' },
-      { label: 'Clientes', href: '#testimonials' },
+      { label: 'Clientes', href: '#testimonials' }
     ],
     cta: { label: 'Contactar', href: '#contact' },
   },
@@ -180,23 +190,27 @@ export const portfolioConfig: PortfolioPageConfig = {
   },
 
   footer: {
-    siteName: 'Studio Arquitectónico',
+    siteName: nombre,
     tagline: 'Transformamos espacios en experiencias',
     contacts: [
-      { label: '+54 11 XXXX-XXXX', href: 'tel:+5411XXXXXXXX', icon: '📞' },
-      { label: 'info@studio.com', href: 'mailto:info@studio.com', icon: '✉️' },
-      { label: 'Buenos Aires, Argentina', href: '#', icon: '📍' },
+      { label: numero, href: `https://wa.me/${numero.replace(/\s+/g, '')}?text=${encodeURIComponent(whatsappMessage)}`, icon: '📞' },
+      { label: mail, href: `mailto:${mail}?subject=Consulta%20de%20Proyecto`, icon: '✉️' },
+      { label: 'Buenos Aires, Argentina', href: 'https://maps.google.com/?q=Buenos+Aires,+Argentina', icon: '📍' },
     ],
     socialLinks: [
-      { platform: 'Instagram', href: '#', icon: '📷' },
-      { platform: 'Facebook', href: '#', icon: 'f' },
-      { platform: 'LinkedIn', href: '#', icon: 'in' },
+      { platform: 'Instagram', href: `https://instagram.com/${instagram}`, icon: '📷' },
+      { platform: 'Facebook', href: `https://facebook.com/${facebook}`, icon: 'f' },
+      { platform: 'LinkedIn', href: `https://linkedin.com/company/${linkedin}`, icon: 'in' },
     ],
   },
 
   stickyBar: {
     cta: { label: 'Contactar Ahora', href: '#contact' },
     subtitle: 'Consulta gratuita sin compromiso',
+  },
+    whatsApp: {
+    message: whatsappMessage,
+    number: numero,
   },
 };
 

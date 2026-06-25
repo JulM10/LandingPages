@@ -30,11 +30,11 @@ export function StickyBar({ cta, subtitle }: PortfolioStickyBarConfig) {
 
   return (
     <div
-      className={`fixed bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 z-40 transition-all duration-300 ${
-        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-24 opacity-0 pointer-events-none'
+      className={`fixed top-16 sm:top-20 left-4 sm:left-6 z-30 transition-all duration-300 ${
+        isVisible ? 'translate-y-0 opacity-100' : '-translate-y-24 opacity-0 pointer-events-none'
       }`}
     >
-      <div className="max-w-lg mx-auto bg-white rounded-xl shadow-xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="w-full sm:w-96 bg-white rounded-xl shadow-xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex-1">
           <p className="text-sm sm:text-base font-semibold text-dark">
             ¿Tienes un proyecto?
