@@ -149,6 +149,20 @@ export interface PortfolioStickyBarConfig {
   subtitle?: string;
 }
 
+// Contact - Form Section
+export interface PortfolioContactConfig {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  formFields: {
+    nombre: string;
+    telefono: string;
+    email: string;
+    informacion: string;
+  };
+  submitButton: string;
+}
+
 // Full Portfolio Config
 export interface PortfolioPageConfig {
   header: PortfolioHeaderConfig;
@@ -157,6 +171,7 @@ export interface PortfolioPageConfig {
   gallery: PortfolioGalleryConfig;
   process: PortfolioProcessConfig;
   testimonials: PortfolioTestimonialsConfig;
+  contact: PortfolioContactConfig;
   cta: PortfolioCTAConfig;
   footer: PortfolioFooterConfig;
   stickyBar: PortfolioStickyBarConfig;

@@ -7,6 +7,7 @@ import { Services } from '@/components/portfolio/sections/Services';
 import { Gallery } from '@/components/portfolio/sections/Gallery';
 import { Process } from '@/components/portfolio/sections/Process';
 import { Testimonials } from '@/components/portfolio/sections/Testimonials';
+import { Contact } from '@/components/portfolio/sections/Contact';
 import { Cta } from '@/components/portfolio/sections/Cta';
 
 export default function PortfolioPage() {
@@ -31,6 +32,9 @@ export default function PortfolioPage() {
 
         {/* Testimonials */}
         <Testimonials {...portfolioConfig.testimonials} />
+
+        {/* Contact */}
+        <Contact {...portfolioConfig.contact} />
 
         {/* CTA */}
         <Cta {...portfolioConfig.cta} />

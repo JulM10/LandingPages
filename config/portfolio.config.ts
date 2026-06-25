@@ -159,6 +159,19 @@ export const portfolioConfig: PortfolioPageConfig = {
     ],
   },
 
+  contact: {
+    eyebrow: 'Contacto',
+    title: 'Cuéntanos sobre tu proyecto',
+    subtitle: 'Completa el formulario y nos pondremos en contacto contigo a la brevedad',
+    formFields: {
+      nombre: 'Tu nombre',
+      telefono: 'Teléfono',
+      email: 'Email',
+      informacion: 'Más información sobre tu proyecto',
+    },
+    submitButton: 'Enviar',
+  },
+
   cta: {
     eyebrow: 'Contacto',
     title: '¿Listo para tu próximo proyecto?',

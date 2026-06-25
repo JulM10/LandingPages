@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { useAnalytics } from '@/lib/analytics';
 import { useInView } from '@/lib/useInView';
 import type { PortfolioHeroConfig } from '@/types/portfolio.config.types';
@@ -14,6 +15,18 @@ export function Hero({
 }: PortfolioHeroConfig) {
   const ref = useInView('portfolio_hero');
   const { trackCTAClick } = useAnalytics();
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  // Detectar si es desktop para aplicar parallax
+  useEffect(() => {
+    const checkDesktop = () => {
+      setIsDesktop(window.innerWidth >= 768); // md breakpoint
+    };
+
+    checkDesktop();
+    window.addEventListener('resize', checkDesktop);
+    return () => window.removeEventListener('resize', checkDesktop);
+  }, []);
 
   const handleCtaClick = () => {
     trackCTAClick(cta.label, 'hero', cta.href);
@@ -32,7 +45,7 @@ export function Hero({
             className="w-full h-full bg-cover bg-center"
             style={{
               backgroundImage: `url('${background.src}')`,
-              backgroundAttachment: 'fixed',
+              backgroundAttachment: isDesktop ? 'fixed' : 'scroll',
             }}
           />
         ) : (

@@ -18,9 +18,13 @@ export function Services({
 
   const handleContactClick = (serviceTitle: string) => {
     trackCTAClick('Contactarse', `service_${serviceTitle}`, '#contact');
+    // Disparar evento para pre-llenar el formulario con el nombre del servicio
+    window.dispatchEvent(new CustomEvent('serviceContact', { detail: `Estoy interesado en: ${serviceTitle}` }));
     // Scroll a la sección de contacto
-    const contactSection = document.getElementById('contact');
-    contactSection?.scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => {
+      const contactSection = document.getElementById('contact');
+      contactSection?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
   };
 
   return (
