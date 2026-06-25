@@ -65,7 +65,7 @@ export function Services({
               {/* Card Header - Always visible */}
               <button
                 onClick={() => {
-                  trackFeatureInteraction('click', service.title, idx);
+                  trackFeatureInteraction('expand', service.title, idx);
                   setExpandedId(expandedId === idx ? null : idx);
                 }}
                 className="w-full p-6 sm:p-8 text-left hover:bg-light transition-colors group"
