@@ -1,9 +1,11 @@
 'use client';
 
 import { motion, cubicBezier } from 'framer-motion';
+import { useAnalytics } from '@/lib/analytics';
 import type { AgendaConfig } from '@/types/motion.config.types';
 
 export function Cta({ eyebrow, title, subtitle, cta, secondaryCta, whatsappNumber }: AgendaConfig) {
+  const { trackCTAClick } = useAnalytics();
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -70,6 +72,7 @@ export function Cta({ eyebrow, title, subtitle, cta, secondaryCta, whatsappNumbe
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
             <motion.a
               href={cta.href}
+              onClick={() => trackCTAClick(cta.label, 'cta_section', cta.href)}
               className="px-10 py-4 text-base font-bold rounded-xl bg-gradient-to-r from-primary to-accent text-white transition hover:shadow-lg hover:shadow-primary/50"
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
@@ -79,6 +82,7 @@ export function Cta({ eyebrow, title, subtitle, cta, secondaryCta, whatsappNumbe
             {secondaryCta && whatsappLink && (
               <motion.a
                 href={whatsappLink}
+                onClick={() => trackCTAClick(secondaryCta.label, 'cta_section', whatsappLink)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 rounded-xl border px-8 py-4 text-sm font-bold text-white/80 hover:text-white hover:border-white/30 transition"

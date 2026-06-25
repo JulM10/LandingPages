@@ -2,6 +2,7 @@
 
 import { motion, cubicBezier } from 'framer-motion';
 import Image from 'next/image';
+import { useInView } from '@/lib/useInView';
 import type { SaasGalleryConfig } from '@/types/saas.config.types';
 
 export function SaasGallery({
@@ -10,6 +11,7 @@ export function SaasGallery({
   subtitle,
   images = [],
 }: SaasGalleryConfig) {
+  const ref = useInView('gallery');
   if (!images || images.length === 0) return null;
 
   const itemVariants = {
@@ -36,7 +38,7 @@ export function SaasGallery({
   };
 
   return (
-    <section id="gallery" className="bg-light px-4 sm:px-6 py-12 sm:py-16 md:py-24 lg:py-32">
+    <section ref={ref} id="gallery" className="bg-light px-4 sm:px-6 py-12 sm:py-16 md:py-24 lg:py-32">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div

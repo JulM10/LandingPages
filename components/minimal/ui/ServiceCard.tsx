@@ -1,12 +1,27 @@
+'use client';
+
+import { useEffect, useRef } from 'react';
+import { useAnalytics } from '@/lib/analytics';
+
 export type Service = {
-  icon: string;         
-  tag: string;         
-  title: string;       
-  description: string;  
-  features: string[];  
+  icon: string;
+  tag: string;
+  title: string;
+  description: string;
+  features: string[];
 };
 
 export function ServiceCard({ icon, tag, title, description, features }: Service) {
+  const { trackFeatureInteraction } = useAnalytics();
+  const tracked = useRef(false);
+
+  useEffect(() => {
+    if (!tracked.current) {
+      trackFeatureInteraction('view', title);
+      tracked.current = true;
+    }
+  }, [title, trackFeatureInteraction]);
+
   return (
     <article className="bg-white border border-dark/10 rounded-2xl p-8 hover:shadow-xl hover:-translate-y-1 hover:border-primary/20 transition">
         <span aria-hidden="true" className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-2xl mb-5">{icon}</span>

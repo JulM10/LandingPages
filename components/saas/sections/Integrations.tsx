@@ -1,6 +1,7 @@
 'use client';
 
 import { motion, cubicBezier } from 'framer-motion';
+import { useInView } from '@/lib/useInView';
 import type { IntegrationsConfig } from '@/types/saas.config.types';
 
 export function Integrations({
@@ -8,6 +9,7 @@ export function Integrations({
   title,
   logos = [],
 }: IntegrationsConfig) {
+  const ref = useInView('integrations');
   if (!logos || logos.length === 0) return null;
 
   const itemVariants = {
@@ -34,7 +36,7 @@ export function Integrations({
   };
 
   return (
-    <section id="integraciones" className="bg-light px-4 sm:px-6 py-12 sm:py-16 md:py-24 lg:py-32">
+    <section ref={ref} id="integraciones" className="bg-light px-4 sm:px-6 py-12 sm:py-16 md:py-24 lg:py-32">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <motion.div

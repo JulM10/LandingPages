@@ -2,7 +2,8 @@
 
 import { motion, Variants } from "framer-motion";
 import { ConversionHeroConfig } from "@/types/motion.config.types";
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
+import { useAnalytics } from "@/lib/analytics";
 
 const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
@@ -18,15 +19,27 @@ const shineVariants: Variants = {
 };
 
 export function Hero({ eyebrow, title, subtitle, highlight, bullets, form }: ConversionHeroConfig) {
+    const { trackFormSubmit } = useAnalytics();
     const [empresa, setEmpresa] = useState("");
     const [contacto, setContacto] = useState("");
     const [inversion, setInversion] = useState("");
+    const [descripcion, setDescripcion] = useState("");
     const [enviado, setEnviado] = useState(false);
+
+    // Escuchar custom event cuando se selecciona un plan
+    useEffect(() => {
+        const handlePlanSeleccionado = (event: CustomEvent<string>) => {
+            setDescripcion(`Plan: ${event.detail}`);
+        };
+
+        window.addEventListener('planSeleccionado', handlePlanSeleccionado as EventListener);
+        return () => window.removeEventListener('planSeleccionado', handlePlanSeleccionado as EventListener);
+    }, []);
 
     const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
-        formData.append("access_key", process.env.NEXT_PUBLIC_WEB3FORMS_KEY!);
+        formData.append("access_key", process.env.NEXT_PUBLIC_WEB3FORMS_KEY_JMWEB!);
 
         const response = await fetch("https://api.web3forms.com/submit", {
             method: "POST",
@@ -34,13 +47,16 @@ export function Hero({ eyebrow, title, subtitle, highlight, bullets, form }: Con
         });
 
         const data = await response.json();
+        if (data.success) {
+            trackFormSubmit("hero", { empresa, contacto, inversion, descripcion });
+        }
         setEnviado(data.success);
     };
 
     return (
         <section id="hero" className="relative bg-dark pt-32 pb-20 overflow-hidden">
             {/* Glows decorativos */}
-            <div className="absolute -top-20 right-0 w-96 h-96 rounded-full pointer-events-none"
+            <div id="form" className="absolute -top-20 right-0 w-96 h-96 rounded-full pointer-events-none"
                 style={{ background: "radial-gradient(circle, rgba(43,169,247,.22) 0%, transparent 70%)", filter: "blur(40px)" }} />
             <div className="absolute bottom-0 left-10 w-72 h-72 rounded-full pointer-events-none"
                 style={{ background: "radial-gradient(circle, rgba(24,184,204,.15) 0%, transparent 70%)", filter: "blur(40px)" }} />
@@ -170,7 +186,7 @@ export function Hero({ eyebrow, title, subtitle, highlight, bullets, form }: Con
                         {form.subtitle}
                     </motion.p>
 
-                    <form className="mt-6 space-y-4" onSubmit={onSubmit} id="form">
+                    <form className="mt-6 space-y-4" onSubmit={onSubmit}>
                         <div>
                             <label className="block text-sm font-medium text-muted mb-1">{form.empresa}</label>
                             <input
@@ -210,6 +226,18 @@ export function Hero({ eyebrow, title, subtitle, highlight, bullets, form }: Con
                                 </select>
                             </div>
                         )}
+
+                        <div>
+                            <label className="block text-sm font-medium text-muted mb-1">Descripción (opcional)</label>
+                            <textarea
+                                name="descripcion"
+                                value={descripcion}
+                                onChange={(e) => setDescripcion(e.target.value)}
+                                placeholder="Cuéntanos más sobre tu proyecto..."
+                                className="w-full px-4 py-2 border border-dark/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none"
+                                rows={2}
+                            />
+                        </div>
 
                         <motion.button
                             type="submit"

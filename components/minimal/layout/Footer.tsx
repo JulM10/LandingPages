@@ -1,7 +1,17 @@
+'use client';
+
 import Image from "next/image"
+import { useAnalytics } from "@/lib/analytics";
 import type { FooterConfig } from "@/types/minimal.config.types";
 
 export function Footer({ nombre, contacts, isologoSrc }:FooterConfig) {
+  const { trackSocialClick } = useAnalytics();
+
+  const handleContactClick = (label: string, href: string) => {
+    const platform = label.toLowerCase() === 'whatsapp' ? 'WhatsApp' : label.toLowerCase() === 'email' ? 'Email' : label;
+    trackSocialClick(platform, label, href);
+  };
+
   return (
     <footer className="bg-dark py-10 px-[6%] border-t border-white/10">
       <div className="flex flex-col md:flex-row justify-between items-center gap-4">
@@ -15,6 +25,7 @@ export function Footer({ nombre, contacts, isologoSrc }:FooterConfig) {
               <a
                 key={contact.label}
                 href={contact.href}
+                onClick={() => handleContactClick(contact.label, contact.href)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-white/50 hover:text-primary transition"
@@ -29,6 +40,7 @@ export function Footer({ nombre, contacts, isologoSrc }:FooterConfig) {
         Desarrollado por{" "}
         <a
           href="https://instagram.com/quanty.ads"
+          onClick={() => handleContactClick('Quanty Ads Team', 'https://instagram.com/quanty.ads')}
           target="_blank"
           rel="noopener noreferrer"
           className="text-white/50 hover:text-primary transition font-medium"

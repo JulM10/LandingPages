@@ -1,9 +1,16 @@
+'use client';
+
 import { StatCard } from "../ui/StatCard";
 import { Button } from "../ui/Button";
+import { useAnalytics } from "@/lib/analytics";
 import type { HeroConfig } from "@/types/minimal.config.types";
 
 export function Hero({ badge, headline, highlight, subtitle, cta, secondaryCta, stats }:HeroConfig) {
+  const { trackCTAClick } = useAnalytics();
   const [before, after] = highlight ? headline.split(highlight) : ["", ""];
+
+  const handleCtaClick = () => trackCTAClick(cta.label, 'hero', cta.href);
+  const handleSecondaryCtaClick = () => trackCTAClick(secondaryCta!.label, 'hero', secondaryCta!.href);
 
   return (
     <section aria-labelledby="hero-heading" className="min-h-[80vh] flex flex-col items-start justify-center px-6 md:px-12 lg:px-24 pt-24 pb-8">
@@ -27,9 +34,9 @@ export function Hero({ badge, headline, highlight, subtitle, cta, secondaryCta, 
             {subtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 mt-10">
-            <Button label={cta.label} href={cta.href} />
+            <Button label={cta.label} href={cta.href} onClick={handleCtaClick} />
             {secondaryCta && (
-              <Button label={secondaryCta.label} href={secondaryCta.href} variant="secondary" />
+              <Button label={secondaryCta.label} href={secondaryCta.href} variant="secondary" onClick={handleSecondaryCtaClick} />
             )}
           </div>
         </div>

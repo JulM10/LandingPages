@@ -1,9 +1,18 @@
 'use client';
 
 import Image from 'next/image';
+import { useAnalytics } from '@/lib/analytics';
 import type { FooterConfig } from '@/types/saas.config.types';
 
 export function Footer({ nombre, contacts, isologoSrc }: FooterConfig) {
+  const { trackSocialClick } = useAnalytics();
+
+  const handleContactClick = (label: string, href: string) => {
+    // Extraer la plataforma del label o href
+    const platform = label.toLowerCase() === 'whatsapp' ? 'WhatsApp' : label.toLowerCase() === 'email' ? 'Email' : label;
+    trackSocialClick(platform, label, href);
+  };
+
   return (
     <footer
       className="py-6 md:py-10 px-6 border-t border-white/10"
@@ -33,6 +42,7 @@ export function Footer({ nombre, contacts, isologoSrc }: FooterConfig) {
               <a
                 key={contact.label}
                 href={contact.href}
+                onClick={() => handleContactClick(contact.label, contact.href)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-xs md:text-sm text-white/50 hover:text-primary transition"

@@ -1,6 +1,7 @@
 'use client';
 
 import { motion, cubicBezier } from 'framer-motion';
+import { useAnalytics } from '@/lib/analytics';
 import type { PlansConfig } from '@/types/motion.config.types';
 
 export function Plans({
@@ -9,7 +10,19 @@ export function Plans({
   subtitle,
   items = [],
 }: PlansConfig) {
+  const { trackPlanSelection } = useAnalytics();
+
   if (!items || items.length === 0) return null;
+
+  const handlePlanClick = (planName: string, plandetail: string) => {
+    trackPlanSelection(planName);
+    // Disparar custom event para que el form se actualice
+    window.dispatchEvent(new CustomEvent('planSeleccionado', { detail: planName +' '+ plandetail }));
+    setTimeout(() => {
+      const form = document.getElementById('form');
+      form?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -130,6 +143,7 @@ export function Plans({
               {/* Botón */}
               <a
                 href="#form"
+                onClick={() => handlePlanClick(plan.name, plan.title)}
                 className={`mt-6 block text-center rounded-xl border py-2.5 text-sm font-bold transition ${
                   plan.featured
                     ? 'bg-gradient-to-r from-primary to-accent text-white border-primary/50 hover:shadow-lg hover:shadow-primary/50'

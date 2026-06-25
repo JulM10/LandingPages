@@ -1,9 +1,15 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { useAnalytics } from "@/lib/analytics";
 
 export function StickyBar({ cta }: { cta: { label: string; href: string } }) {
+  const { trackCTAClick } = useAnalytics();
   const [isVisible, setIsVisible] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
+
+  const handleCtaClick = () => {
+    trackCTAClick(cta.label, 'sticky_bar', cta.href);
+  };
 
   useEffect(() => {
     const hero = document.getElementById("hero");
@@ -33,6 +39,7 @@ export function StickyBar({ cta }: { cta: { label: string; href: string } }) {
         </p>
         <a
           href={cta.href}
+          onClick={handleCtaClick}
           className="ml-auto inline-flex items-center rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-primary/30 hover:bg-primary/90 transition"
         >
           {cta.label}

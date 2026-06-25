@@ -1,6 +1,7 @@
 'use client';
 
 import { motion, cubicBezier } from 'framer-motion';
+import { useInView } from '@/lib/useInView';
 import type { ProblemSolutionConfig } from '@/types/saas.config.types';
 
 export function ProblemSolution({
@@ -9,6 +10,7 @@ export function ProblemSolution({
   problems = [],
   solution,
 }: ProblemSolutionConfig) {
+  const ref = useInView('problem_solution');
   if (!problems || problems.length === 0) return null;
 
   const itemVariants = {
@@ -35,7 +37,7 @@ export function ProblemSolution({
   };
 
   return (
-    <section id="problema" className="bg-light px-4 sm:px-6 py-12 sm:py-16 md:py-24 lg:py-32">
+    <section ref={ref} id="problema" className="bg-light px-4 sm:px-6 py-12 sm:py-16 md:py-24 lg:py-32">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <motion.div

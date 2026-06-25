@@ -1,12 +1,14 @@
 'use client';
 
 import { motion, cubicBezier } from 'framer-motion';
+import { useInView } from '@/lib/useInView';
 import type { TrustConfig } from '@/types/saas.config.types';
 
 export function Trust({
   badges = [],
   stats = [],
 }: TrustConfig) {
+  const ref = useInView('trust');
   if ((!badges || badges.length === 0) && (!stats || stats.length === 0)) {
     return null;
   }
@@ -35,7 +37,7 @@ export function Trust({
   };
 
   return (
-    <section id="seguridad" className="bg-dark px-4 sm:px-6 py-12 sm:py-16 md:py-24 lg:py-32">
+    <section ref={ref} id="seguridad" className="bg-dark px-4 sm:px-6 py-12 sm:py-16 md:py-24 lg:py-32">
       <div className="max-w-5xl mx-auto">
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-16"

@@ -1,9 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useAnalytics } from "@/lib/analytics";
 import { HeaderConfig } from "@/types/motion.config.types";
 
 export function Header({ logoSrc, nombre, links, textButton }: HeaderConfig) {
+  const { trackCTAClick } = useAnalytics();
+
+  const handleNavClick = (label: string, href: string) => {
+    trackCTAClick(label, 'header_nav', href);
+  };
+
+  const handleCtaClick = () => {
+    trackCTAClick(textButton.label, 'header_cta', textButton.href);
+  };
+
   return (
     <motion.header
       initial={{ opacity: 0, y: -20 }}
@@ -27,6 +38,7 @@ export function Header({ logoSrc, nombre, links, textButton }: HeaderConfig) {
             <motion.a
               key={link.label}
               href={link.href}
+              onClick={() => handleNavClick(link.label, link.href)}
               className="text-sm text-white/50 hover:text-white transition font-medium"
               whileHover={{ color: "#f4f6f8" }}
             >
@@ -38,6 +50,7 @@ export function Header({ logoSrc, nombre, links, textButton }: HeaderConfig) {
         {/* CTA Button */}
         <motion.a
           href={textButton.href}
+          onClick={handleCtaClick}
           className="inline-flex items-center rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-lg"
           whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(43, 169, 247, 0.4)" }}
           whileTap={{ scale: 0.95 }}

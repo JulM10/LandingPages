@@ -1,9 +1,20 @@
+'use client';
+
+import { useAnalytics } from "@/lib/analytics";
 import type { WhatsAppConfig } from "@/types/minimal.config.types";
 
 export function WhatsAppFloat({ message, number }: WhatsAppConfig) {
+  const { trackSocialClick } = useAnalytics();
+  const whatsappUrl = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+
+  const handleClick = () => {
+    trackSocialClick('WhatsApp', number, whatsappUrl);
+  };
+
   return (
     <a
-      href={`https://wa.me/${number}?text=${encodeURIComponent(message)}`}
+      href={whatsappUrl}
+      onClick={handleClick}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Abrir chat de WhatsApp"

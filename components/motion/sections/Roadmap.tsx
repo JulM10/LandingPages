@@ -1,6 +1,7 @@
 'use client';
 
 import { motion, cubicBezier } from 'framer-motion';
+import { useAnalytics } from '@/lib/analytics';
 import type { RoadmapConfig } from '@/types/motion.config.types';
 
 export function Roadmap({
@@ -9,6 +10,7 @@ export function Roadmap({
   subtitle,
   steps = [],
 }: RoadmapConfig) {
+  const { trackRoadmapInteraction } = useAnalytics();
   if (!steps || steps.length === 0) return null;
 
   const containerVariants = {
@@ -85,6 +87,8 @@ export function Roadmap({
           {steps.map((step, idx) => (
             <motion.div
               key={idx}
+              onAnimationComplete={() => trackRoadmapInteraction('view', (idx + 1).toString(), step.name)}
+              onHoverStart={() => trackRoadmapInteraction('hover', (idx + 1).toString(), step.name)}
               className="bg-white rounded-2xl p-7 text-center relative border border-dark/10 shadow-sm hover:shadow-md transition-all"
               variants={itemVariants}
               whileHover={{ y: -4 }}

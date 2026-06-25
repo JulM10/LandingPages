@@ -1,3 +1,8 @@
+'use client';
+
+import { useEffect, useRef } from 'react';
+import { useAnalytics } from '@/lib/analytics';
+
 export type Plan = {
     icon: string;
     name: string;
@@ -8,6 +13,16 @@ export type Plan = {
 };
 
 export function PlanCard({ icon, name, title, platform, features, featured = false }: Plan) {
+    const { trackPlanSelection } = useAnalytics();
+    const tracked = useRef(false);
+
+    useEffect(() => {
+        if (!tracked.current) {
+            trackPlanSelection(name);
+            tracked.current = true;
+        }
+    }, [name, trackPlanSelection]);
+
     return (
         <article className={`relative border ${featured
             ? 'border-primary ring-2 ring-primary shadow-xl bg-dark'

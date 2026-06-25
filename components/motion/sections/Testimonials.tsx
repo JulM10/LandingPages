@@ -1,6 +1,7 @@
 'use client';
 
 import { motion, cubicBezier } from 'framer-motion';
+import { useAnalytics } from '@/lib/analytics';
 import type { Testimonios } from '@/types/motion.config.types';
 
 export function Testimonials({
@@ -8,6 +9,7 @@ export function Testimonials({
   title,
   columnas = [],
 }: Testimonios) {
+  const { trackTestimonialInteraction } = useAnalytics();
   if (!columnas || columnas.length === 0) return null;
 
   const containerVariants = {
@@ -71,6 +73,7 @@ export function Testimonials({
           {columnas.map((testimonio, idx) => (
             <motion.div
               key={idx}
+              onAnimationComplete={() => trackTestimonialInteraction(idx, testimonio.name)}
               className="rounded-2xl border border-white/10 bg-white/5 p-6 hover:bg-white/10 hover:border-primary/30 transition-all"
               variants={itemVariants}
               whileHover={{ y: -4 }}

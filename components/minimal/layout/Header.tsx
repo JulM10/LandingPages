@@ -1,11 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import { useAnalytics } from "@/lib/analytics";
 import { Button } from "../ui/Button";
 import type { HeaderConfig } from "@/types/minimal.config.types";
 
 export function Header({ logoSrc, nombre, links, textButton }:HeaderConfig) {
+  const { trackCTAClick } = useAnalytics();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleNavClick = (label: string, href: string) => {
+    trackCTAClick(label, 'header_nav', href);
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-dark/80 backdrop-blur-md">
@@ -15,13 +21,13 @@ export function Header({ logoSrc, nombre, links, textButton }:HeaderConfig) {
           <ul className="flex items-center space-x-8">
             {links?.map((link) => (
               <li key={link.href}>
-                <a href={link.href} className="text-white hover:text-white/80 transition">
+                <a href={link.href} onClick={() => handleNavClick(link.label, link.href)} className="text-white hover:text-white/80 transition">
                   {link.label}
                 </a>
               </li>
             ))}
           </ul>
-          <Button label={textButton.label} href={textButton.href} />
+          <Button label={textButton.label} href={textButton.href} onClick={() => trackCTAClick(textButton.label, 'header_cta', textButton.href)} />
         </nav>
         <button
           aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
@@ -37,7 +43,7 @@ export function Header({ logoSrc, nombre, links, textButton }:HeaderConfig) {
             {links?.map((link) => (
               <li key={link.href}>
                 <a href={link.href}
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => { handleNavClick(link.label, link.href); setIsMenuOpen(false); }}
                   className="text-white hover:text-white/80 transition block">
                   {link.label}
                 </a>

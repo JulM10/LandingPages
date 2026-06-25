@@ -3,6 +3,7 @@
 import { motion, cubicBezier } from 'framer-motion';
 import Image from 'next/image';
 import type { SaasDemoConfig } from '@/types/saas.config.types';
+import { useInView } from '@/lib/useInView';
 
 export function SaasDemo({
   eyebrow,
@@ -23,9 +24,10 @@ export function SaasDemo({
       },
     },
   };
+  const ref = useInView('saas_demo');
 
   return (
-    <section id="demo" className="bg-light px-4 sm:px-6 py-12 sm:py-16 md:py-24 lg:py-32">
+    <section ref={ref} id="demo" className="bg-light px-4 sm:px-6 py-12 sm:py-16 md:py-24 lg:py-32">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <motion.div

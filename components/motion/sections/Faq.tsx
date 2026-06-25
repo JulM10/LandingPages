@@ -2,6 +2,7 @@
 
 import { motion, cubicBezier } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { useAnalytics } from '@/lib/analytics';
 import type { FAQConfig } from '@/types/motion.config.types';
 import { clientConfig } from '@/config/client.config';
 
@@ -11,6 +12,7 @@ export function Faq({
   subtitle,
   questions = [],
 }: FAQConfig) {
+  const { trackFAQInteraction } = useAnalytics();
   const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
@@ -123,8 +125,11 @@ export function Faq({
                 key={idx}
                 className="group rounded-2xl overflow-hidden border border-dark/10 bg-white transition-all"
                 variants={itemVariants}
+                onToggle={(e) => trackFAQInteraction((e.currentTarget as HTMLDetailsElement).open ? 'expand' : 'collapse', idx, item.question)}
               >
-                <summary className="flex cursor-pointer items-center gap-4 p-5 select-none hover:bg-light/50 transition-colors">
+                <summary
+                  className="flex cursor-pointer items-center gap-4 p-5 select-none hover:bg-light/50 transition-colors"
+                >
                   {/* Icon */}
                   <div
                     className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${colors[idx]?.bg} ${colors[idx]?.text}`}

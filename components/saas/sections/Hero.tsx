@@ -3,6 +3,7 @@
 import { motion, cubicBezier } from 'framer-motion';
 import { useAnalytics } from '@/lib/analytics'; // 📊 Analytics
 import type { HeroConfig } from '@/types/saas.config.types';
+import { useInView } from '@/lib/useInView';
 
 export function Hero({
   badge,
@@ -13,24 +14,20 @@ export function Hero({
   secondaryCta,
 }: HeroConfig) {
   // 📊 ANALYTICS: Inicializar tracking
-  const { trackEvent } = useAnalytics();
+  const { trackCTAClick } = useAnalytics();
 
   const handleCtaClick = () => {
-    // 📊 ANALYTICS: Trackear click en CTA principal
-    trackEvent('cta_click', {
-      cta_label: cta?.label,
-      cta_location: 'hero_section',
-      page: 'saas',
-    });
+    // 📊 ANALYTICS: Trackear click en CTA principal (GA4 + Meta Pixel)
+    if (cta) {
+      trackCTAClick(cta.label, 'hero', cta.href);
+    }
   };
 
   const handleSecondaryCTAClick = () => {
-    // 📊 ANALYTICS: Trackear click en CTA secundaria
-    trackEvent('secondary_cta_click', {
-      cta_label: secondaryCta?.label,
-      cta_location: 'hero_section',
-      page: 'saas',
-    });
+    // 📊 ANALYTICS: Trackear click en CTA secundaria (GA4 + Meta Pixel)
+    if (secondaryCta) {
+      trackCTAClick(secondaryCta.label, 'hero', secondaryCta.href);
+    }
   };
 
   const containerVariants = {
@@ -68,8 +65,10 @@ export function Hero({
     },
   };
 
+const ref = useInView('hero');
+
   return (
-    <section className="relative bg-gradient-to-br from-dark via-dark to-dark/95 px-4 sm:px-6 py-16 sm:py-24 md:py-32 lg:py-40 min-h-[100vh] lg:min-h-screen flex items-center justify-center overflow-hidden">
+    <section ref={ref} className="relative bg-gradient-to-br from-dark via-dark to-dark/95 px-4 sm:px-6 py-16 sm:py-24 md:py-32 lg:py-40 min-h-[100vh] lg:min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background blur elements - hidden on small screens */}
       <div className="absolute top-0 right-0 w-64 h-64 sm:w-96 sm:h-96 bg-primary/20 rounded-full blur-3xl opacity-20" />
       <div className="absolute bottom-0 left-0 w-64 h-64 sm:w-96 sm:h-96 bg-accent/20 rounded-full blur-3xl opacity-20" />

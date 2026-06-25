@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, cubicBezier } from 'framer-motion';
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useEffect } from 'react';
 import { useAnalytics } from '@/lib/analytics'; // 📊 Analytics
 
 export function SaasPricingForm() {
@@ -11,8 +11,28 @@ export function SaasPricingForm() {
   const [nombre, setNombre] = useState('');
   const [email, setEmail] = useState('');
   const [empresa, setEmpresa] = useState('');
+  const [descripcion, setDescripcion] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const planSeleccionado = localStorage.getItem('planSeleccionado');
+      if (planSeleccionado) {
+        localStorage.removeItem('planSeleccionado');
+        return `Plan: ${planSeleccionado}`;
+      }
+    }
+    return '';
+  });
   const [enviado, setEnviado] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  // Escuchar custom event cuando se selecciona un plan
+  useEffect(() => {
+    const handlePlanSeleccionado = (event: CustomEvent<string>) => {
+      setDescripcion(`Plan: ${event.detail}`);
+    };
+
+    window.addEventListener('planSeleccionado', handlePlanSeleccionado as EventListener);
+    return () => window.removeEventListener('planSeleccionado', handlePlanSeleccionado as EventListener);
+  }, []);
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -23,11 +43,12 @@ export function SaasPricingForm() {
       form_type: 'pricing_contact',
       email: email,
       empresa: empresa || 'sin_empresa',
+      descripcion: descripcion || 'sin_plan',
       page: 'saas_pricing',
     });
 
     const formData = new FormData(event.currentTarget);
-    formData.append('access_key', process.env.NEXT_PUBLIC_WEB3FORMS_KEY!);
+    formData.append('access_key', process.env.NEXT_PUBLIC_WEB3FORMS_KEY_JMWEB!);
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
@@ -42,6 +63,7 @@ export function SaasPricingForm() {
           form_type: 'pricing_contact',
           email: email,
           empresa: empresa || 'sin_empresa',
+          descripcion: descripcion || 'sin_plan',
           page: 'saas_pricing',
         });
 
@@ -49,6 +71,7 @@ export function SaasPricingForm() {
         setNombre('');
         setEmail('');
         setEmpresa('');
+        setDescripcion('');
         setTimeout(() => setEnviado(false), 5000);
       }
     } catch (error) {
@@ -79,6 +102,7 @@ export function SaasPricingForm() {
       }}
       variants={itemVariants}
       whileHover={{ y: -8, boxShadow: '0 0 20px rgba(82, 183, 136, 0.3)' }}
+      id="form"
     >
       {/* Header */}
       <div className="mb-6">
@@ -157,6 +181,30 @@ export function SaasPricingForm() {
               border: '2px solid',
             }}
             className="w-full px-4 py-3 rounded-xl text-dark placeholder-gray-400 focus:outline-none transition-all text-sm"
+            onFocus={(e) => {
+              e.currentTarget.style.boxShadow = '0 0 0 3px rgba(82, 183, 136, 0.15)';
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+          />
+        </div>
+
+        {/* Descripción */}
+        <div>
+          <textarea
+            name="descripcion"
+            placeholder="¿Qué plan te interesa? (opcional)"
+            value={descripcion}
+            onChange={(e) => setDescripcion(e.target.value)}
+            style={{
+              background: 'white',
+              borderColor: '#52b788',
+              color: '#0b1c2d',
+              border: '2px solid',
+            }}
+            className="w-full px-4 py-3 rounded-xl text-dark placeholder-gray-400 focus:outline-none transition-all text-sm resize-none"
+            rows={2}
             onFocus={(e) => {
               e.currentTarget.style.boxShadow = '0 0 0 3px rgba(82, 183, 136, 0.15)';
             }}

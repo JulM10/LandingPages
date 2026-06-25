@@ -1,6 +1,21 @@
+'use client';
+
+import { useAnalytics } from "@/lib/analytics";
 import { PlansConfigConversion } from "@/types/conversion.config.types";
 
 export function Plans({ eyebrow, title, subtitle, items }: PlansConfigConversion) {
+  const { trackPlanSelection } = useAnalytics();
+
+  const handlePlanClick = (planName: string) => {
+    trackPlanSelection(planName);
+    // Disparar custom event para que el form se actualice
+    window.dispatchEvent(new CustomEvent('planSeleccionado', { detail: planName }));
+    setTimeout(() => {
+      const form = document.getElementById('form');
+      form?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
+
   return (
     <section id="planes" className="bg-dark text-white px-6 py-16 md:py-20">
       <div className="max-w-6xl mx-auto">
@@ -33,6 +48,7 @@ export function Plans({ eyebrow, title, subtitle, items }: PlansConfigConversion
                 </ul>
               </div>
               <a href="#form"
+                 onClick={() => handlePlanClick(item.title)}
                  className={`mt-6 block text-center rounded-lg px-4 py-2.5 text-sm font-bold transition ${item.featured
                    ? "bg-primary text-white shadow-lg shadow-primary/30 hover:bg-primary/90"
                    : "border border-white/20 text-white hover:border-primary hover:text-primary"}`}>

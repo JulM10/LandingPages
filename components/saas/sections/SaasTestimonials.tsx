@@ -1,6 +1,8 @@
 'use client';
 
 import { motion, cubicBezier } from 'framer-motion';
+import { useInView } from '@/lib/useInView';
+import { useAnalytics } from '@/lib/analytics';
 import type { Testimonios } from '@/types/saas.config.types';
 
 export function SaasTestimonials({
@@ -8,6 +10,8 @@ export function SaasTestimonials({
   title,
   columnas = [],
 }: Testimonios) {
+  const ref = useInView('testimonials');
+  const { trackTestimonialInteraction } = useAnalytics();
   if (!columnas || columnas.length === 0) return null;
 
   const itemVariants = {
@@ -34,7 +38,7 @@ export function SaasTestimonials({
   };
 
   return (
-    <section id="testimonials" className="bg-gradient-to-br from-dark via-dark to-dark/95 px-4 sm:px-6 py-12 md:py-24 lg:py-32">
+    <section ref={ref} id="testimonials" className="bg-gradient-to-br from-dark via-dark to-dark/95 px-4 sm:px-6 py-12 md:py-24 lg:py-32">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
@@ -74,6 +78,7 @@ export function SaasTestimonials({
           {columnas.map((testimonial, idx) => (
             <motion.div
               key={idx}
+              onAnimationComplete={() => trackTestimonialInteraction(idx, testimonial.name)}
               className="rounded-2xl p-6 sm:p-8 bg-white/5 border border-white/10 backdrop-blur-sm hover:border-primary/30 hover:bg-white/10 transition-all duration-300"
               variants={itemVariants}
               whileHover={{ y: -4 }}

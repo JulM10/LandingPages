@@ -1,9 +1,17 @@
 "use client";
 import { useState } from "react";
+import { useAnalytics } from "@/lib/analytics";
 import { FAQConfig } from "@/types/conversion.config.types";
 
 export function Faq({ eyebrow, title, subtitle, questions }: FAQConfig) {
+    const { trackFAQInteraction } = useAnalytics();
     const [abierto, setAbierto] = useState<number | null>(null);
+
+    const handleFAQToggle = (idx: number, question: string) => {
+        const isClosing = abierto === idx;
+        trackFAQInteraction(isClosing ? 'collapse' : 'expand', idx, question);
+        setAbierto(isClosing ? null : idx);
+    };
 
     return (
         <section className="bg-white px-6 py-16 md:py-20">
@@ -15,7 +23,7 @@ export function Faq({ eyebrow, title, subtitle, questions }: FAQConfig) {
             <div className="max-w-3xl mx-auto space-y-3">
                 {questions.map((q, i) => (
                     <div key={i} className="rounded-xl border border-dark/10 bg-light p-5">
-                        <button onClick={() => setAbierto(abierto === i ? null : i)} className="flex w-full items-center justify-between text-left font-semibold text-dark">
+                        <button onClick={() => handleFAQToggle(i, q.question)} className="flex w-full items-center justify-between text-left font-semibold text-dark">
                             {q.question}
                             <span className="text-primary text-xl">{abierto === i ? "−" : "+"}</span>
                         </button>

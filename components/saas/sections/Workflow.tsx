@@ -2,6 +2,7 @@
 
 import { motion, cubicBezier } from 'framer-motion';
 import Image from 'next/image';
+import { useInView } from '@/lib/useInView';
 import type { WorkflowConfig } from '@/types/saas.config.types';
 
 export function Workflow({
@@ -9,6 +10,7 @@ export function Workflow({
   title,
   steps = [],
 }: WorkflowConfig) {
+  const ref = useInView('workflow');
   if (!steps || steps.length === 0) return null;
 
   const itemVariants = {
@@ -24,7 +26,7 @@ export function Workflow({
   };
 
   return (
-    <section id="workflow" className="bg-dark px-4 sm:px-6 py-12 sm:py-16 md:py-24 lg:py-32">
+    <section ref={ref} id="workflow" className="bg-dark px-4 sm:px-6 py-12 sm:py-16 md:py-24 lg:py-32">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div

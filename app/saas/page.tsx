@@ -1,3 +1,6 @@
+'use client';
+
+import { useTimeTracking } from '@/lib/useTimeTracking';
 import { Header } from '@/components/saas/layout/Header';
 import { Hero } from '@/components/saas/sections/Hero';
 import { SaasDemo } from '@/components/saas/sections/SaasDemo';
@@ -17,7 +20,7 @@ import { saaExampleConfig } from '@/config/saas.example';
 
 export default function SaaSPage() {
   const config = saaExampleConfig;
-
+  useTimeTracking();
   return (
     <>
       <StickyBar cta={{ label: 'Comenzar →', href: '#pricing' }} />

@@ -1,6 +1,8 @@
 'use client';
 
 import { motion, cubicBezier } from 'framer-motion';
+import { useInView } from '@/lib/useInView';
+import { useAnalytics } from '@/lib/analytics';
 import type { ServicesConfig } from '@/types/saas.config.types';
 
 export function Services({
@@ -9,6 +11,8 @@ export function Services({
   subtitle,
   items = [],
 }: ServicesConfig) {
+  const ref = useInView('services');
+  const { trackFeatureInteraction } = useAnalytics();
   if (!items || items.length === 0) return null;
 
   const containerVariants = {
@@ -35,7 +39,7 @@ export function Services({
   };
 
   return (
-    <section id="servicios" className="bg-dark px-6 py-12 md:py-20">
+    <section ref={ref} id="servicios" className="bg-dark px-6 py-12 md:py-20">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
@@ -82,6 +86,7 @@ export function Services({
               className="rounded-2xl p-6 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-primary/50 transition-all group"
               variants={itemVariants}
               whileHover={{ y: -4 }}
+              onAnimationComplete={() => trackFeatureInteraction('view', service.title, idx)}
             >
               {/* Icon */}
               <div className="text-4xl mb-4">

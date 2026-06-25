@@ -1,6 +1,7 @@
 'use client';
 
 import { motion, cubicBezier } from 'framer-motion';
+import { useAnalytics } from '@/lib/analytics';
 import type { ServicesConfig } from '@/types/motion.config.types';
 
 export function Services({
@@ -9,6 +10,7 @@ export function Services({
   subtitle,
   items = [],
 }: ServicesConfig) {
+  const { trackFeatureInteraction } = useAnalytics();
   if (!items || items.length === 0) return null;
 
   const containerVariants = {
@@ -79,6 +81,7 @@ export function Services({
           {items.map((service, idx) => (
             <motion.div
               key={idx}
+              onAnimationComplete={() => trackFeatureInteraction('view', service.title, idx)}
               className="rounded-2xl p-6 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-primary/50 transition-all group"
               variants={itemVariants}
               whileHover={{ y: -4 }}

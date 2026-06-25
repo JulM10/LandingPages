@@ -4,6 +4,18 @@ const nombre = "Quanty Ads";
 const mail = "quantyads@gmail.com"
 const numero = "5493584296560";
 
+// SEO Metadata
+export const seoMetadata = {
+  title: "Quanty Ads — Escalamos negocios con data",
+  description: "Agencia de Paid Media en Córdoba. Meta Ads, Google Ads y TikTok Ads orientados a resultados reales.",
+  siteName: "Quanty Ads",
+  locale: "es_AR",
+  ogImage: "/og-image.png",
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
+  alt: "Quanty Ads — Agencia de Paid Media"
+};
+
 export const clientConfig: ClientConfig = {
     header: {
         logoSrc: "/quanty_wordmark.svg",

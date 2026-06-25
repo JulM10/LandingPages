@@ -1,18 +1,40 @@
 "use client"
 import { ConversionHeroConfig } from "@/types/conversion.config.types";
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
+import { useAnalytics } from "@/lib/analytics";
 
 export function Hero({ eyebrow, title, subtitle, highlight, bullets, form }: ConversionHeroConfig) {
+    const { trackFormSubmit } = useAnalytics();
     const [empresa, setEmpresa] = useState("");
     const [contacto, setContacto] = useState("");
     const [inversion, setInversion] = useState("");
-    const [enviado, setEnviado] = useState(false)
+    const [descripcion, setDescripcion] = useState(() => {
+        if (typeof window !== 'undefined') {
+            const planSeleccionado = localStorage.getItem('planSeleccionado');
+            if (planSeleccionado) {
+                localStorage.removeItem('planSeleccionado');
+                return `Plan: ${planSeleccionado}`;
+            }
+        }
+        return '';
+    });
+    const [enviado, setEnviado] = useState(false);
+
+    // Escuchar custom event cuando se selecciona un plan
+    useEffect(() => {
+        const handlePlanSeleccionado = (event: CustomEvent<string>) => {
+            setDescripcion(`Plan: ${event.detail}`);
+        };
+
+        window.addEventListener('planSeleccionado', handlePlanSeleccionado as EventListener);
+        return () => window.removeEventListener('planSeleccionado', handlePlanSeleccionado as EventListener);
+    }, []);
 
     //configuracion web3forms cambiar la access_key
     const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
-        formData.append("access_key", process.env.NEXT_PUBLIC_WEB3FORMS_KEY!);
+        formData.append("access_key", process.env.NEXT_PUBLIC_WEB3FORMS_KEY_JMWEB!);
 
         const response = await fetch("https://api.web3forms.com/submit", {
             method: "POST",
@@ -20,12 +42,15 @@ export function Hero({ eyebrow, title, subtitle, highlight, bullets, form }: Con
         });
 
         const data = await response.json();
+        if (data.success) {
+            trackFormSubmit("hero", { empresa, contacto, inversion, descripcion });
+        }
         setEnviado(data.success)
     };
 
     return (
         <section id="hero" className="relative bg-dark py-16 overflow-hidden">
-            <div className="absolute -top-32 -right-24 h-96 w-96 rounded-full bg-primary/20 blur-3xl pointer-events-none"></div>
+            <div id="form" className="absolute -top-32 -right-24 h-96 w-96 rounded-full bg-primary/20 blur-3xl pointer-events-none"></div>
             <div className="absolute bottom-0 left-0 h-64 w-64 rounded-full bg-accent/10 blur-3xl pointer-events-none"></div>
             <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-10 items-center relative">
                 <div>
@@ -103,6 +128,20 @@ export function Hero({ eyebrow, title, subtitle, highlight, bullets, form }: Con
                                     </select>
                                 </div>
                             )}
+                            <div className="mb-4">
+                                <label htmlFor="descripcion" className="block text-sm font-medium text-muted">
+                                    Descripción (opcional)
+                                </label>
+                                <textarea
+                                    name="descripcion"
+                                    value={descripcion}
+                                    onChange={(e) => setDescripcion(e.target.value)}
+                                    id="descripcion"
+                                    placeholder="Cuéntanos más sobre tu proyecto..."
+                                    className="px-4 py-3 mt-1 block w-full border border-dark/15 rounded-md shadow-sm focus:outline-none focus:ring-primary/20 focus:border-primary resize-none"
+                                    rows={2}
+                                />
+                            </div>
                             <button type="submit" className="w-full rounded-lg bg-primary px-6 py-4 text-base font-bold text-white shadow-lg shadow-primary/30 hover:bg-primary/90 transition">
                                 {form.cta.label}
                             </button>

@@ -2,6 +2,8 @@
 
 import { motion, cubicBezier } from 'framer-motion';
 import { useState } from 'react';
+import { useInView } from '@/lib/useInView';
+import { useAnalytics } from '@/lib/analytics';
 import type { FAQConfig } from '@/types/saas.config.types';
 
 export function SaasFaq({
@@ -10,9 +12,17 @@ export function SaasFaq({
   subtitle,
   questions = [],
 }: FAQConfig) {
+  const ref = useInView('faq');
+  const { trackFAQInteraction } = useAnalytics();
   const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   if (!questions || questions.length === 0) return null;
+
+  const handleFAQToggle = (idx: number, question: string) => {
+    const isClosing = openIdx === idx;
+    trackFAQInteraction(isClosing ? 'collapse' : 'expand', idx, question);
+    setOpenIdx(isClosing ? null : idx);
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -38,7 +48,7 @@ export function SaasFaq({
   };
 
   return (
-    <section id="faq" className="bg-light px-4 sm:px-6 py-12 sm:py-16 md:py-24 lg:py-32">
+    <section ref={ref} id="faq" className="bg-light px-4 sm:px-6 py-12 sm:py-16 md:py-24 lg:py-32">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <motion.div
@@ -87,7 +97,7 @@ export function SaasFaq({
               variants={itemVariants}
             >
               <button
-                onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
+                onClick={() => handleFAQToggle(idx, item.question)}
                 className="w-full text-left px-4 sm:px-6 py-4 sm:py-5 flex items-center justify-between gap-3 hover:bg-light/50 transition-colors"
               >
                 {/* Question */}

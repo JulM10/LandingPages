@@ -1,6 +1,8 @@
 'use client';
 
 import { motion, cubicBezier } from 'framer-motion';
+import { useInView } from '@/lib/useInView';
+import { useAnalytics } from '@/lib/analytics';
 import { SaasPricingForm } from './SaasPricingForm';
 import type { PlansConfig } from '@/types/saas.config.types';
 
@@ -10,6 +12,8 @@ export function SaasPricing({
   subtitle,
   items = [],
 }: PlansConfig) {
+  const ref = useInView('pricing');
+  const { trackPlanSelection } = useAnalytics();
   if (!items || items.length === 0) return null;
 
   const itemVariants = {
@@ -36,7 +40,7 @@ export function SaasPricing({
   };
 
   return (
-    <section id="pricing" className="bg-light px-4 sm:px-6 py-12 md:py-24 lg:py-32">
+    <section ref={ref} id="pricing" className="bg-light px-4 sm:px-6 py-12 md:py-24 lg:py-32">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
@@ -88,6 +92,7 @@ export function SaasPricing({
               }`}
               variants={itemVariants}
               whileHover={{ y: -8 }}
+              onAnimationComplete={() => trackPlanSelection(plan.name)}
             >
               {/* Featured badge */}
               {plan.featured && (
@@ -151,7 +156,16 @@ export function SaasPricing({
 
               {/* CTA Button */}
               <a
-                href="#contact"
+                href="#form"
+                onClick={() => {
+                  trackPlanSelection(plan.name);
+                  // Disparar custom event para que el form se actualice
+                  window.dispatchEvent(new CustomEvent('planSeleccionado', { detail: plan.name }));
+                  setTimeout(() => {
+                    const form = document.getElementById('form');
+                    form?.scrollIntoView({ behavior: 'smooth' });
+                  }, 100);
+                }}
                 data-plan={plan.name.toLowerCase()} // 📊 GTM tracking: plan_cta_click
                 className={`block w-full py-3 sm:py-4 rounded-xl font-bold transition-all duration-300 text-sm sm:text-base text-center ${
                   plan.featured

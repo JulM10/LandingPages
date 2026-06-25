@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useAnalytics } from '@/lib/analytics';
 
 interface StickyBarProps {
   cta?: {
@@ -10,8 +11,13 @@ interface StickyBarProps {
 }
 
 export function StickyBar({ cta = { label: 'Reservar mi lugar →', href: '#form' } }: StickyBarProps) {
+  const { trackCTAClick } = useAnalytics();
   const [isVisible, setIsVisible] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
+
+  const handleCtaClick = () => {
+    trackCTAClick(cta.label, 'sticky_bar', cta.href);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,6 +72,7 @@ export function StickyBar({ cta = { label: 'Reservar mi lugar →', href: '#form
         {/* Right: CTA Button */}
         <a
           href={cta.href}
+          onClick={handleCtaClick}
           className="inline-flex items-center justify-center gap-2 px-5 py-2 text-sm font-bold rounded-lg transition-all duration-200 hover:translate-y-[-2px]"
           style={{
             background: 'linear-gradient(135deg, var(--color-primary) 0%, #0d90e0 100%)',

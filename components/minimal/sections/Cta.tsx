@@ -1,8 +1,16 @@
+'use client';
+
 import { Button } from "../ui/Button";
 import { Fragment } from "react";
+import { useAnalytics } from "@/lib/analytics";
 import type { RoadmapConfig } from "@/types/minimal.config.types";
 
 export function Cta({ eyebrow, title, subtitle, steps, cta, secondaryCta, disclaimer }:RoadmapConfig) {
+    const { trackCTAClick } = useAnalytics();
+
+    const handleCtaClick = () => trackCTAClick(cta.label, 'cta', cta.href);
+    const handleSecondaryCtaClick = () => trackCTAClick(secondaryCta!.label, 'cta', secondaryCta!.href);
+
     return (
         <section id="contacto" aria-labelledby="cta-heading" className="bg-dark py-16 md:py-24 px-6 md:px-12 lg:px-24 text-white">
             <header className="max-w-3xl mx-auto text-center">
@@ -31,8 +39,8 @@ export function Cta({ eyebrow, title, subtitle, steps, cta, secondaryCta, discla
                 </div>
             )}
             <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-                <Button label={cta.label} href={cta.href} />
-                {secondaryCta && <Button label={secondaryCta.label} href={secondaryCta.href} variant="secondary" />}
+                <Button label={cta.label} href={cta.href} onClick={handleCtaClick} />
+                {secondaryCta && <Button label={secondaryCta.label} href={secondaryCta.href} variant="secondary" onClick={handleSecondaryCtaClick} />}
             </div>
             {disclaimer && <p className="text-xs text-white/80 mt-4 max-w-2xl mx-auto text-center">{disclaimer}</p>}
         </section>

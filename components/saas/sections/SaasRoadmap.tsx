@@ -1,6 +1,8 @@
 'use client';
 
 import { motion, cubicBezier } from 'framer-motion';
+import { useInView } from '@/lib/useInView';
+import { useAnalytics } from '@/lib/analytics';
 import type { RoadmapConfig } from '@/types/saas.config.types';
 
 export function SaasRoadmap({
@@ -10,6 +12,8 @@ export function SaasRoadmap({
   steps = [],
   cta,
 }: RoadmapConfig) {
+  const ref = useInView('roadmap');
+  const { trackRoadmapInteraction } = useAnalytics();
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -34,7 +38,7 @@ export function SaasRoadmap({
   };
 
   return (
-    <section id="roadmap" className="bg-light px-4 sm:px-6 py-12 md:py-24 lg:py-32">
+    <section ref={ref} id="roadmap" className="bg-light px-4 sm:px-6 py-12 md:py-24 lg:py-32">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <motion.div
@@ -105,6 +109,8 @@ export function SaasRoadmap({
                   className="relative z-10 mb-4 flex-shrink-0"
                   variants={itemVariants}
                   whileHover={{ scale: 1.1 }}
+                  onAnimationComplete={() => trackRoadmapInteraction('view', step.number, step.name)}
+                  onHoverStart={() => trackRoadmapInteraction('hover', step.number, step.name)}
                 >
                   <div
                     className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center font-black text-base sm:text-lg text-white shadow-lg"
@@ -147,6 +153,7 @@ export function SaasRoadmap({
           >
             <a
               href={cta.href}
+              onClick={() => trackRoadmapInteraction('click', steps.length.toString(), cta.label)}
               className="inline-block px-6 sm:px-8 py-3 sm:py-4 rounded-xl bg-gradient-to-r from-primary to-accent text-white font-bold text-sm sm:text-base hover:shadow-xl hover:shadow-primary/50 transition-all duration-300 hover:-translate-y-1"
             >
               {cta.label}
