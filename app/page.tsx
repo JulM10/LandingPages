@@ -13,6 +13,7 @@ import { Cta } from "@/components/motion/sections/Cta";
 import { Footer } from "@/components/motion/layout/Footer";
 import { StickyBar } from "@/components/motion/layout/StickyBar";
 import { motionConfig } from "@/config/motion.config";
+import { WhatsAppFloat } from "@/components/motion/layout/WhatsAppFloat";
 
 const config = motionConfig;
 
@@ -32,6 +33,7 @@ export default function MotionPage() {
       <Roadmap {...config.roadmapconfig} />
       <Faq {...config.faq} />
       <Cta {...config.agendaUnaLlamada} />
+      <WhatsAppFloat {...config.whatsapp}/>
       <Footer {...config.footer} />
     </>
   );

@@ -165,3 +165,174 @@ export const clientConfig: ClientConfig = {
         disclaimer: "Diagnóstico sin compromiso · @Quanty.Ads · Nueva Córdoba"
     }
 };
+
+// ============ PORTFOLIO CONFIG ============
+export const portfolioConfig = {
+  // OPCIÓN 1: Hero con IMAGEN
+  hero: {
+    background: {
+      type: 'image' as const,
+      src: '/images/portfolio-hero.jpg',
+    },
+    overlayOpacity: 0.5,
+    eyebrow: 'Nuestro Portafolio',
+    title: 'Proyectos que transforman espacios',
+    subtitle: 'Experiencia en construcción y diseño de espacios comerciales',
+    cta: { label: 'Ver Proyectos', href: '#gallery' },
+  },
+
+  // OPCIÓN 2: Hero con VIDEO (comentado - descomenta para usar)
+  // hero: {
+  //   background: {
+  //     type: 'video' as const,
+  //     src: '/videos/portfolio-hero.mp4',
+  //     videoType: 'mp4' as const,
+  //   },
+  //   overlayOpacity: 0.5,
+  //   eyebrow: 'Nuestro Portafolio',
+  //   title: 'Proyectos que transforman espacios',
+  //   subtitle: 'Experiencia en construcción y diseño de espacios comerciales',
+  //   cta: { label: 'Ver Proyectos', href: '#gallery' },
+  // },
+
+  services: {
+    eyebrow: 'Servicios',
+    title: 'Lo que hacemos',
+    subtitle: 'Ofrecemos soluciones integrales para tus proyectos',
+    services: [
+      {
+        image: '/images/service-construccion.jpg',
+        title: 'Construcción',
+        description: 'Proyectos de construcción con estándares de calidad internacionales',
+      },
+      {
+        image: '/images/service-diseño.jpg',
+        title: 'Diseño Interior',
+        description: 'Diseño de espacios funcionales y estéticos',
+      },
+      {
+        image: '/images/service-planificacion.jpg',
+        title: 'Planificación',
+        description: 'Planificación y gestión de proyectos desde el inicio',
+      },
+    ],
+  },
+  gallery: {
+    eyebrow: 'Galería',
+    title: 'Nuestros Proyectos',
+    subtitle: 'Visualiza trabajos realizados',
+    projects: [
+      {
+        id: '1',
+        image: '/images/project-1.jpg',
+        title: 'Centro Comercial',
+        category: 'Comercial',
+        year: 2023,
+      },
+      {
+        id: '2',
+        image: '/images/project-2.jpg',
+        title: 'Oficinas Corporativas',
+        category: 'Corporativo',
+        year: 2023,
+      },
+      {
+        id: '3',
+        image: '/images/project-3.jpg',
+        title: 'Residencial Premium',
+        category: 'Residencial',
+        year: 2022,
+      },
+    ],
+    columns: 3,
+  },
+  process: {
+    eyebrow: 'Proceso',
+    title: 'Cómo trabajamos',
+    subtitle: 'Metodología probada en cada proyecto',
+    steps: [
+      {
+        number: 1,
+        title: 'Consulta',
+        description: 'Entendemos tus necesidades',
+        icon: '📋',
+      },
+      {
+        number: 2,
+        title: 'Diseño',
+        description: 'Creamos la solución perfecta',
+        icon: '🎨',
+      },
+      {
+        number: 3,
+        title: 'Ejecución',
+        description: 'Implementamos con excelencia',
+        icon: '🔨',
+      },
+      {
+        number: 4,
+        title: 'Entrega',
+        description: 'Proyecto completado a tiempo',
+        icon: '✓',
+      },
+    ],
+  },
+  testimonials: {
+    eyebrow: 'Testimonios',
+    title: 'Clientes Satisfechos',
+    subtitle: 'Experiencias reales de nuestros proyectos',
+    testimonials: [
+      {
+        clientName: 'Juan Rodríguez',
+        clientRole: 'Director',
+        clientCompany: 'Empresa XYZ',
+        testimonialText: 'Excelente trabajo, muy profesionales y atentos a los detalles.',
+        rating: 5,
+        projectCategory: 'Comercial',
+      },
+      {
+        clientName: 'María García',
+        clientRole: 'Propietaria',
+        clientCompany: 'Inmobiliaria ABC',
+        testimonialText: 'Superaron nuestras expectativas en diseño y ejecución.',
+        rating: 5,
+        projectCategory: 'Residencial',
+      },
+    ],
+  },
+  cta: {
+    eyebrow: 'Contacto',
+    title: '¿Listo para tu próximo proyecto?',
+    subtitle: 'Contáctanos para una consulta sin compromiso',
+    cta: { label: 'Solicitar Consulta', href: '#contact' },
+  },
+  header: {
+    logo: '/logo.png',
+    siteName: 'Studio Arquitectónico',
+    navLinks: [
+      { label: 'Proyectos', href: '#gallery' },
+      { label: 'Servicios', href: '#services' },
+      { label: 'Proceso', href: '#process' },
+      { label: 'Clientes', href: '#testimonials' },
+    ],
+    cta: { label: 'Contactar', href: '#contact' },
+  },
+  footer: {
+    siteName: 'Studio Arquitectónico',
+    tagline: 'Transformamos espacios en experiencias',
+    contacts: [
+      { label: '+54 11 XXXX-XXXX', href: 'tel:+5411XXXXXXXX', icon: '📞' },
+      { label: 'info@studio.com', href: 'mailto:info@studio.com', icon: '✉️' },
+      { label: 'Buenos Aires, Argentina', href: '#', icon: '📍' },
+    ],
+    socialLinks: [
+      { platform: 'Instagram', href: '#', icon: '📷' },
+      { platform: 'Facebook', href: '#', icon: 'f' },
+      { platform: 'LinkedIn', href: '#', icon: 'in' },
+    ],
+  },
+  stickyBar: {
+    cta: { label: 'Contactar Ahora', href: '#contact' },
+    subtitle: 'Consulta gratuita sin compromiso',
+  },
+};
