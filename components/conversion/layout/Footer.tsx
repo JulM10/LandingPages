@@ -36,17 +36,17 @@ export function Footer({ nombre, contacts, isologoSrc }:FooterConfig) {
           </div>
         )}
       </div>
-      <p className="text-center text-xs text-white/30 mt-6">
-        Desarrollado por{" "}
-        <a
-          href="https://instagram.com/quanty.ads"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-white/50 hover:text-primary transition font-medium"
-        >
-          Quanty Ads Team
-        </a>
-      </p>
+          <p className="text-xs sm:text-sm text-white/40">
+            Powered by{' '}
+            <a
+              href="https://maderowebs.com.ar"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/60 hover:text-primary transition font-semibold"
+            >
+              Julio Madero
+            </a>
+          </p>
     </footer>
   );
 }

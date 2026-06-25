@@ -40,10 +40,10 @@ export interface WhatsAppConfig {
   number: string;
 }
 
-export interface QuienesSomosConfig { 
-  eyebrow?: string;
+export interface QuienesSomosConfig {
+  eyebrow: string;
   title: string;
-  subtitle?: string;
+  subtitle: string;
   stat: { title: string; description: string }[];
   people: {
     name: string,
@@ -54,10 +54,10 @@ export interface QuienesSomosConfig {
   }[];
 }
 
-export interface PlansConfigConversion { 
-  eyebrow?:string;
-  title?: string;
-  subtitle?: string;
+export interface PlansConfigConversion {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
   items: {
     name: string;
     title: string;
@@ -86,10 +86,10 @@ export interface ConversionHeroConfig {
   };
 }
 
-export interface BenefitsConfig { 
-  eyebrow?: string;
+export interface BenefitsConfig {
+  eyebrow: string;
   title: string;
-  subtitle?: string;
+  subtitle: string;
   items: {
     icon: string;
     title: string;
@@ -97,10 +97,10 @@ export interface BenefitsConfig {
   }[]
 }
 
-export interface NosEligenConfig { 
-  eyebrow?: string;
+export interface NosEligenConfig {
+  eyebrow: string;
   title: string;
-  subtitle?: string;
+  subtitle: string;
   company: {
     logoSrc: string;
     name: string;
@@ -110,19 +110,19 @@ export interface NosEligenConfig {
 }
 
 export interface FAQConfig {
-  eyebrow?: string;
+  eyebrow: string;
   title: string;
-  subtitle?: string;
+  subtitle: string;
   questions: {
     question: string;
     answer: string
   }[];
 }
 
-export interface DiferenciasConfig { 
-  eyebrow?: string;
+export interface DiferenciasConfig {
+  eyebrow: string;
   title: string;
-  subtitle?: string;
+  subtitle: string;
   columnas: {
     title: string;
     puntos: string[];
@@ -130,13 +130,13 @@ export interface DiferenciasConfig {
   }[]
 }
 
-export interface AgendaConfig { 
-  eyebrow?: string;
+export interface AgendaConfig {
+  eyebrow: string;
   title: string;
-  subtitle?: string;
+  subtitle: string;
   cta: CtaButton;
-  secondaryCta?: CtaButton;
-  whatsappNumber?: string;
+  secondaryCta: CtaButton;
+  whatsappNumber: string;
 }
 
 
@@ -158,5 +158,4 @@ export interface ConversionConfig {
   agendaUnaLlamada: AgendaConfig;
   whatsapp: WhatsAppConfig;
   footer: FooterConfig;
-
 }

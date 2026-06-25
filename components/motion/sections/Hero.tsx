@@ -22,9 +22,12 @@ export function Hero({ eyebrow, title, subtitle, highlight, bullets, form }: Con
     const { trackFormSubmit } = useAnalytics();
     const [empresa, setEmpresa] = useState("");
     const [contacto, setContacto] = useState("");
+    const [email, setEmail] = useState("");
+    const [numero, setNumero] = useState("");
     const [inversion, setInversion] = useState("");
     const [descripcion, setDescripcion] = useState("");
     const [enviado, setEnviado] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     // Escuchar custom event cuando se selecciona un plan
     useEffect(() => {
@@ -38,19 +41,34 @@ export function Hero({ eyebrow, title, subtitle, highlight, bullets, form }: Con
 
     const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        setLoading(true);
+
         const formData = new FormData(event.currentTarget);
         formData.append("access_key", process.env.NEXT_PUBLIC_WEB3FORMS_KEY_JMWEB!);
 
-        const response = await fetch("https://api.web3forms.com/submit", {
-            method: "POST",
-            body: formData,
-        });
+        try {
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                body: formData,
+            });
 
-        const data = await response.json();
-        if (data.success) {
-            trackFormSubmit("hero", { empresa, contacto, inversion, descripcion });
+            const data = await response.json();
+            if (data.success) {
+                trackFormSubmit("hero", { empresa, contacto, email, numero, inversion, descripcion });
+                setEnviado(true);
+                setEmpresa("");
+                setContacto("");
+                setEmail("");
+                setNumero("");
+                setInversion("");
+                setDescripcion("");
+                setTimeout(() => setEnviado(false), 5000);
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        } finally {
+            setLoading(false);
         }
-        setEnviado(data.success);
     };
 
     return (
@@ -195,6 +213,7 @@ export function Hero({ eyebrow, title, subtitle, highlight, bullets, form }: Con
                                 value={empresa}
                                 onChange={(e) => setEmpresa(e.target.value)}
                                 placeholder={form.empresa}
+                                required
                                 className="w-full px-4 py-2 border border-dark/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
                             />
                         </div>
@@ -207,6 +226,33 @@ export function Hero({ eyebrow, title, subtitle, highlight, bullets, form }: Con
                                 value={contacto}
                                 onChange={(e) => setContacto(e.target.value)}
                                 placeholder={form.contacto}
+                                required
+                                className="w-full px-4 py-2 border border-dark/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-muted mb-1">Email</label>
+                            <input
+                                type="email"
+                                name="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="tu@email.com"
+                                required
+                                className="w-full px-4 py-2 border border-dark/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-muted mb-1">Teléfono</label>
+                            <input
+                                type="tel"
+                                name="numero"
+                                value={numero}
+                                onChange={(e) => setNumero(e.target.value)}
+                                placeholder="+54 9 XXXX-XXXX"
+                                required
                                 className="w-full px-4 py-2 border border-dark/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
                             />
                         </div>
@@ -241,11 +287,12 @@ export function Hero({ eyebrow, title, subtitle, highlight, bullets, form }: Con
 
                         <motion.button
                             type="submit"
-                            className="w-full bg-primary text-white py-3 rounded-lg font-bold shadow-lg"
+                            disabled={loading || enviado}
+                            className="w-full bg-primary text-white py-3 rounded-lg font-bold shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                         >
-                            {form.cta.label}
+                            {loading ? 'Enviando...' : enviado ? '✓ Enviado!' : form.cta.label}
                         </motion.button>
 
                         {enviado && (

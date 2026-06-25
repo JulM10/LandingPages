@@ -10,6 +10,17 @@ const twitter = "quantyads"
 const linkedin = "quantyads"
 const whatsappMessage = "Hola, quiero más información sobre sus servicios.";
 
+export const seoMetadata = {
+  title: "Quanty Ads — Escalamos negocios con data",
+  description: "Agencia de Paid Media en Córdoba. Meta Ads, Google Ads y TikTok Ads orientados a resultados reales.",
+  siteName: "Quanty Ads",
+  locale: "es_AR",
+  ogImage: "/og-image.png",
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
+  alt: "Quanty Ads — Agencia de Paid Media"
+};
+
 // OPCIÓN 1: Hero con IMAGEN (Activa)
 export const portfolioConfig: PortfolioPageConfig = {
   header: {

@@ -14,10 +14,12 @@ export function NosEligen({ eyebrow, title, subtitle, company }: NosEligenConfig
                         href={company.instagram}
                         rel="noopener"
                         className="group rounded-xl border border-dark/10 bg-white overflow-hidden hover:border-primary/40 hover:shadow-md transition">
-                        <div className="h-20.bg-primary/5.border-b.border-dark/5.flex.items-center.justify-center">
-                            <span className="font-heading font-black text-primary text-2xl">
-                                {company.logoSrc}
-                            </span>
+                        <div className="h-20 bg-primary/5 border-b border-dark/5 flex items-center justify-center">
+                            <img
+                                src={company.logoSrc}
+                                alt={company.name}
+                                className="h-12 w-12 object-contain"
+                            />
                         </div>
                         <div className="p-5">
                             <p className="font-heading font-bold text-dark text-sm group-hover:text-primary transition">{company.name}</p>
