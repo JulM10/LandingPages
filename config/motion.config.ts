@@ -47,7 +47,8 @@ export const motionConfig: MotionConfig = {
       subtitle:
         "Analizamos tu cuenta y te decimos exactamente qué cambiar para vender más. Respondemos en menos de 24h.",
       empresa: "Nombre de tu empresa",
-      contacto: "Email o WhatsApp",
+      mail:"Mail",
+      telefono:"Telefono",
       dropdownlabel: "¿Cuánto invertís en ads?",
       dropdownOptions: ["Menos de $500", "$500 - $1000", "$1000 - $5000", "$5000+"],
       cta: { label: "Enviar diagnóstico", href: "#" },

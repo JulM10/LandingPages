@@ -81,7 +81,8 @@ export interface ConversionHeroConfig {
     title: string;
     subtitle?: string;
     empresa?: string;
-    contacto?: string;
+    mail:string;
+    telefono:string;
     dropdownlabel?: string;
     dropdownOptions?: string[];
     cta: CtaButton;

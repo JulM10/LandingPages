@@ -219,20 +219,7 @@ export function Hero({ eyebrow, title, subtitle, highlight, bullets, form }: Con
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-muted mb-1">{form.contacto}</label>
-                            <input
-                                type="text"
-                                name="contacto"
-                                value={contacto}
-                                onChange={(e) => setContacto(e.target.value)}
-                                placeholder={form.contacto}
-                                required
-                                className="w-full px-4 py-2 border border-dark/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
-                            />
-                        </div>
-
-                        <div>
-                            <label className="block text-sm font-medium text-muted mb-1">Email</label>
+                            <label className="block text-sm font-medium text-muted mb-1">{form.mail}</label>
                             <input
                                 type="email"
                                 name="email"
@@ -245,7 +232,7 @@ export function Hero({ eyebrow, title, subtitle, highlight, bullets, form }: Con
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-muted mb-1">Teléfono</label>
+                            <label className="block text-sm font-medium text-muted mb-1">{form.telefono}</label>
                             <input
                                 type="tel"
                                 name="numero"
