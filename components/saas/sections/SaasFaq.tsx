@@ -2,7 +2,7 @@
 
 import { motion, cubicBezier } from 'framer-motion';
 import { useState } from 'react';
-import type { FAQConfig } from '@/types/config.types';
+import type { FAQConfig } from '@/types/saas.config.types';
 
 export function SaasFaq({
   eyebrow,

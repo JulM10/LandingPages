@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import type { TickerClientesConfig } from '@/types/config.types';
+import type { TickerClientesConfig } from '@/types/motion.config.types';
 
 export function Clients({ companies = [] }: TickerClientesConfig) {
   const [isHovered, setIsHovered] = useState(false);

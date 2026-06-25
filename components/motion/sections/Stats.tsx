@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, cubicBezier } from 'framer-motion';
-import type { MetricasConfig } from '@/types/config.types';
+import type { MetricasConfig } from '@/types/motion.config.types';
 
 export function Stats({ stats = [] }: MetricasConfig) {
   const containerVariants = {

@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, cubicBezier } from 'framer-motion';
-import type { AgendaConfig } from '@/types/config.types';
+import type { AgendaConfig } from '@/types/motion.config.types';
 
 export function Cta({ eyebrow, title, subtitle, cta, secondaryCta, whatsappNumber }: AgendaConfig) {
   const itemVariants = {

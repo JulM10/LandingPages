@@ -2,7 +2,7 @@
 
 import { motion, cubicBezier } from 'framer-motion';
 import { useAnalytics } from '@/lib/analytics'; // 📊 Analytics
-import type { HeroConfig } from '@/types/config.types';
+import type { HeroConfig } from '@/types/saas.config.types';
 
 export function Hero({
   badge,

@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, cubicBezier } from 'framer-motion';
-import type { RoadmapConfig } from '@/types/config.types';
+import type { RoadmapConfig } from '@/types/motion.config.types';
 
 export function Roadmap({
   eyebrow,

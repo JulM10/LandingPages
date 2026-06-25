@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { Button } from "../ui/Button";
+import type { HeaderConfig } from "@/types/minimal.config.types";
 
-export function Header({ logoSrc, nombre, links, textButton }: { logoSrc?: string; nombre?: string; links?: { label: string; href: string }[]; textButton: { label: string; href: string }; }) {
+export function Header({ logoSrc, nombre, links, textButton }:HeaderConfig) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (

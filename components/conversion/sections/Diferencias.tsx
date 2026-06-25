@@ -1,4 +1,4 @@
-import { DiferenciasConfig } from "@/types/config.types";
+import { DiferenciasConfig } from "@/types/conversion.config.types";
 
 export function Diferencias({ eyebrow, title, subtitle, columnas }: DiferenciasConfig) {
     return (

@@ -1,4 +1,4 @@
-import { HeaderConfig } from "@/types/config.types";
+import { HeaderConfig } from "@/types/conversion.config.types";
 
 export function Header({ logoSrc, nombre, textButton }: HeaderConfig) {
   return (

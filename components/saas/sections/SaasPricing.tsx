@@ -2,7 +2,7 @@
 
 import { motion, cubicBezier } from 'framer-motion';
 import { SaasPricingForm } from './SaasPricingForm';
-import type { PlansConfig } from '@/types/config.types';
+import type { PlansConfig } from '@/types/saas.config.types';
 
 export function SaasPricing({
   eyebrow,

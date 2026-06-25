@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, cubicBezier } from 'framer-motion';
-import type { TrustConfig } from '@/types/config.types';
+import type { TrustConfig } from '@/types/saas.config.types';
 
 export function Trust({
   badges = [],

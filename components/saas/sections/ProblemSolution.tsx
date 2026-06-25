@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, cubicBezier } from 'framer-motion';
-import type { ProblemSolutionConfig } from '@/types/config.types';
+import type { ProblemSolutionConfig } from '@/types/saas.config.types';
 
 export function ProblemSolution({
   eyebrow,

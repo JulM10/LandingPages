@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import type { FooterConfig } from '@/types/config.types';
+import type { FooterConfig } from '@/types/motion.config.types';
 
 export function Footer({ nombre, contacts, isologoSrc }: FooterConfig) {
   return (

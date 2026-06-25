@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, cubicBezier } from 'framer-motion';
-import type { Testimonios } from '@/types/config.types';
+import type { Testimonios } from '@/types/saas.config.types';
 
 export function SaasTestimonials({
   eyebrow,

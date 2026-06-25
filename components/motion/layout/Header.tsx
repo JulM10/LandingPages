@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { HeaderConfig } from "@/types/config.types";
+import { HeaderConfig } from "@/types/motion.config.types";
 
 export function Header({ logoSrc, nombre, links, textButton }: HeaderConfig) {
   return (

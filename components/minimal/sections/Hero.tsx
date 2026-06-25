@@ -1,8 +1,8 @@
-import { StatCard, type Stat } from "../ui/StatCard";
+import { StatCard } from "../ui/StatCard";
 import { Button } from "../ui/Button";
+import type { HeroConfig } from "@/types/minimal.config.types";
 
-export function Hero({ badge, headline, highlight, subtitle, cta, secondaryCta, stats }:
-  { badge?: string; headline: string; highlight?: string; subtitle: string; cta: { label: string; href: string }; secondaryCta?: { label: string; href: string }; stats?: Stat[] }) {
+export function Hero({ badge, headline, highlight, subtitle, cta, secondaryCta, stats }:HeroConfig) {
   const [before, after] = highlight ? headline.split(highlight) : ["", ""];
 
   return (

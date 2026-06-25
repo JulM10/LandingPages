@@ -1,7 +1,7 @@
-import { PlanCard, type Plan } from "@/components/minimal/ui/PlanCard";
+import { PlanCard} from "@/components/minimal/ui/PlanCard";
+import type { PlansConfig } from "@/types/minimal.config.types";
 
-export function Plans({ eyebrow, title, subtitle, items }:
-    { eyebrow?: string; title?: string; subtitle?: string; items:Plan[] }) {
+export function Plans({ eyebrow, title, subtitle, items }:PlansConfig) {
     return (
         <section id="planes" aria-labelledby={title ? "plans-heading" : undefined} className="bg-light py-16 md:py-24 px-6 md:px-12 lg:px-24">
             <header className="max-w-3xl mx-auto text-center">

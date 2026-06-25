@@ -2,7 +2,7 @@
 
 import { motion, cubicBezier } from 'framer-motion';
 import Image from 'next/image';
-import type { SaasDemoConfig } from '@/types/config.types';
+import type { SaasDemoConfig } from '@/types/saas.config.types';
 
 export function SaasDemo({
   eyebrow,

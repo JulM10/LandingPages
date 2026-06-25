@@ -1,4 +1,4 @@
-import { QuienesSomosConfig } from "@/types/config.types";
+import { QuienesSomosConfig } from "@/types/conversion.config.types";
 import Image from "next/image";
 
 export function QuienesSomos({ eyebrow, title, subtitle, people, stat }: QuienesSomosConfig) {

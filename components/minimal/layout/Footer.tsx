@@ -1,10 +1,7 @@
 import Image from "next/image"
+import type { FooterConfig } from "@/types/minimal.config.types";
 
-export function Footer({ nombre, contacts, isologoSrc }: {
-  nombre?: string;
-  contacts?: { label: string; href: string }[];
-  isologoSrc?: string;
-}) {
+export function Footer({ nombre, contacts, isologoSrc }:FooterConfig) {
   return (
     <footer className="bg-dark py-10 px-[6%] border-t border-white/10">
       <div className="flex flex-col md:flex-row justify-between items-center gap-4">

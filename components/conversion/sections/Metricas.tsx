@@ -1,4 +1,4 @@
-import { MetricasConfig } from "@/types/config.types"
+import { MetricasConfig } from "@/types/conversion.config.types"
 
 export function Metricas({ stats }: MetricasConfig) {
   return (

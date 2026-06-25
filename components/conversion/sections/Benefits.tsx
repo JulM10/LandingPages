@@ -1,4 +1,4 @@
-import type { BenefitsConfig } from "@/types/config.types";
+import type { BenefitsConfig } from "@/types/conversion.config.types";
 
 export function Benefits({eyebrow, title, subtitle, items }: BenefitsConfig) {
   return (

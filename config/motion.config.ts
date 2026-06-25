@@ -1,4 +1,4 @@
-import type { MotionConfig } from "@/types/config.types";
+import type { MotionConfig } from "@/types/motion.config.types";
 
 // Motion Page Configuration
 // Este archivo contiene toda la configuración para /app/page.tsx (Motion)

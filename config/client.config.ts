@@ -1,4 +1,4 @@
-import type { ClientConfig } from "@/types/config.types";
+import type { ClientConfig } from "@/types/minimal.config.types";
 
 const nombre = "Quanty Ads";
 const mail = "quantyads@gmail.com"
@@ -25,7 +25,7 @@ export const clientConfig: ClientConfig = {
             { value: "3×", label: "Retorno promedio en primeros 90 días", meta: "Clientes activos · Meta + Google" },
             { value: "#1", label: "Equipo certificado en Meta Ads" },
             { value: "#2", label: "Equipo certificado en Google Ads" },
-            { value: "#2", label: "Equipo certificado en Google Ads" },
+            { value: "#3", label: "Equipo certificado en Analytics" },
         ]
     },
     services: {

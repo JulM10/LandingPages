@@ -2,7 +2,7 @@
 
 import { motion, cubicBezier } from 'framer-motion';
 import Image from 'next/image';
-import type { WorkflowConfig } from '@/types/config.types';
+import type { WorkflowConfig } from '@/types/saas.config.types';
 
 export function Workflow({
   eyebrow,

@@ -6,7 +6,7 @@ import { useAnalytics } from '@/lib/analytics'; // 📊 Analytics
 
 export function SaasPricingForm() {
   // 📊 ANALYTICS: Inicializar tracking
-  const { trackEvent } = useAnalytics();
+  const { trackGAEvent } = useAnalytics();
 
   const [nombre, setNombre] = useState('');
   const [email, setEmail] = useState('');
@@ -19,7 +19,7 @@ export function SaasPricingForm() {
     setLoading(true);
 
     // 📊 ANALYTICS: Trackear intento de envío de formulario
-    trackEvent('pricing_form_submit_attempt', {
+    trackGAEvent('pricing_form_submit_attempt', {
       form_type: 'pricing_contact',
       email: email,
       empresa: empresa || 'sin_empresa',
@@ -38,7 +38,7 @@ export function SaasPricingForm() {
       const data = await response.json();
       if (data.success) {
         // 📊 ANALYTICS: Trackear envío exitoso
-        trackEvent('pricing_form_submit_success', {
+        trackGAEvent('pricing_form_submit_success', {
           form_type: 'pricing_contact',
           email: email,
           empresa: empresa || 'sin_empresa',

@@ -1,9 +1,8 @@
 import { Button } from "../ui/Button";
 import { Fragment } from "react";
+import type { RoadmapConfig } from "@/types/minimal.config.types";
 
-export function Cta({ eyebrow, title, subtitle, steps, cta, secondaryCta, disclaimer }: {
-    eyebrow?: string; title: string; subtitle?: string; steps?: { number: string; week: string; name: string }[]; cta: { label: string; href: string }; secondaryCta?: { label: string; href: string }; disclaimer?: string
-}) {
+export function Cta({ eyebrow, title, subtitle, steps, cta, secondaryCta, disclaimer }:RoadmapConfig) {
     return (
         <section id="contacto" aria-labelledby="cta-heading" className="bg-dark py-16 md:py-24 px-6 md:px-12 lg:px-24 text-white">
             <header className="max-w-3xl mx-auto text-center">

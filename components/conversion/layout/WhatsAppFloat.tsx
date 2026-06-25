@@ -1,4 +1,6 @@
-export function WhatsAppFloat({ message, number }: { message: string; number: string }) {
+import { WhatsAppConfig } from "@/types/conversion.config.types";
+
+export function WhatsAppFloat({ message, number }: WhatsAppConfig) {
   return (
     <a
       href={`https://wa.me/${number}?text=${encodeURIComponent(message)}`}

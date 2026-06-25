@@ -1,4 +1,4 @@
-import { PlansConfigConversion } from "@/types/config.types";
+import { PlansConfigConversion } from "@/types/conversion.config.types";
 
 export function Plans({ eyebrow, title, subtitle, items }: PlansConfigConversion) {
   return (

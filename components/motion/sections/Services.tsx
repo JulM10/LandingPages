@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, cubicBezier } from 'framer-motion';
-import type { ServicesConfig } from '@/types/config.types';
+import type { ServicesConfig } from '@/types/motion.config.types';
 
 export function Services({
   eyebrow,

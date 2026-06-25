@@ -1,4 +1,4 @@
-import { NosEligenConfig } from "@/types/config.types";
+import { NosEligenConfig } from "@/types/conversion.config.types";
 
 export function NosEligen({ eyebrow, title, subtitle, company }: NosEligenConfig) {
     return (

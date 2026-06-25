@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, cubicBezier } from 'framer-motion';
-import type { NosEligenConfig } from '@/types/config.types';
+import type { NosEligenConfig } from '@/types/motion.config.types';
 
 export function NosEligen({ eyebrow, title, subtitle, company = [] }: NosEligenConfig) {
   if (!company || company.length === 0) return null;

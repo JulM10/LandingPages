@@ -1,7 +1,7 @@
-import { ServiceCard, type Service } from "@/components/minimal/ui/ServiceCard";
+import { ServiceCard } from "@/components/minimal/ui/ServiceCard";
+import type { ServicesConfig } from "@/types/minimal.config.types";
 
-export function Services({ eyebrow, title, subtitle, items }:
-    { eyebrow?: string; title?: string; subtitle?: string; items:Service[] }) {
+export function Services({ eyebrow, title, subtitle, items }:ServicesConfig) {
     return (
         <section id="servicios" aria-labelledby={title ? "services-heading" : undefined} className="bg-light/95 py-16 md:py-24 px-6 md:px-12 lg:px-24">
             <header className="max-w-3xl">

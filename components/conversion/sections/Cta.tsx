@@ -1,4 +1,4 @@
-import { AgendaConfig } from "@/types/config.types";
+import { AgendaConfig } from "@/types/conversion.config.types";
 
 export function Cta({ eyebrow, title, subtitle, cta }: AgendaConfig) {
   return (

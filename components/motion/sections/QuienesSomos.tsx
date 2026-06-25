@@ -2,7 +2,7 @@
 
 import { motion, cubicBezier } from 'framer-motion';
 import Image from 'next/image';
-import type { QuienesSomosConfig } from '@/types/config.types';
+import type { QuienesSomosConfig } from '@/types/motion.config.types';
 
 export function QuienesSomos({
   eyebrow,

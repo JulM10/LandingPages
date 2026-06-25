@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, cubicBezier } from 'framer-motion';
-import type { IntegrationsConfig } from '@/types/config.types';
+import type { IntegrationsConfig } from '@/types/saas.config.types';
 
 export function Integrations({
   eyebrow,

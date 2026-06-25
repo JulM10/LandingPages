@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { ConversionHeroConfig } from "@/types/config.types";
+import { ConversionHeroConfig } from "@/types/motion.config.types";
 import { useState, FormEvent } from "react";
 
 const itemVariants: Variants = {

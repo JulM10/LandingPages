@@ -1,5 +1,5 @@
 "use client"
-import { ConversionHeroConfig } from "@/types/config.types";
+import { ConversionHeroConfig } from "@/types/conversion.config.types";
 import { useState, FormEvent } from "react";
 
 export function Hero({ eyebrow, title, subtitle, highlight, bullets, form }: ConversionHeroConfig) {

@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { FAQConfig } from "@/types/config.types";
+import { FAQConfig } from "@/types/conversion.config.types";
 
 export function Faq({ eyebrow, title, subtitle, questions }: FAQConfig) {
     const [abierto, setAbierto] = useState<number | null>(null);

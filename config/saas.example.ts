@@ -1,4 +1,4 @@
-import type { SaaSConfig } from '@/types/config.types';
+import type { SaaSConfig } from '@/types/saas.config.types';
 
 export const saaExampleConfig: SaaSConfig = {
   header: {

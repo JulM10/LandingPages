@@ -2,7 +2,7 @@
 
 import { motion, cubicBezier } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import type { FAQConfig } from '@/types/config.types';
+import type { FAQConfig } from '@/types/motion.config.types';
 import { clientConfig } from '@/config/client.config';
 
 export function Faq({
