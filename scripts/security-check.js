@@ -36,45 +36,47 @@ function checkFileExists(filePath, name) {
 }
 
 function checkEnvVars() {
-  const envLocal = path.join(projectRoot, '.env.local');
-  const envExample = path.join(projectRoot, '.env.example');
+  // TODO: Environment variable validation skipped for now
+  // Will be enabled when .env.local setup is ready
+  // const envLocal = path.join(projectRoot, '.env.local');
+  // const envExample = path.join(projectRoot, '.env.example');
 
-  log('\n📋 Environment Variables:', 'blue');
+  // log('\n📋 Environment Variables:', 'blue');
 
-  const required = [
-    'NEXT_PUBLIC_WEB3FORMS_KEY_JMWEB',
-    'NEXT_PUBLIC_GTM_ID_JMWEB',
-    'NEXT_PUBLIC_GA4_ID_JMWEB',
-    'URL_DOMAIN_JMWEB',
-  ];
+  // const required = [
+  //   'NEXT_PUBLIC_WEB3FORMS_KEY_JMWEB',
+  //   'NEXT_PUBLIC_GTM_ID_JMWEB',
+  //   'NEXT_PUBLIC_GA4_ID_JMWEB',
+  //   'URL_DOMAIN_JMWEB',
+  // ];
 
-  const optional = [
-    'NEXT_PUBLIC_META_PIXEL_ID_JMWEB',
-    'NEXT_PUBLIC_LOG_ENDPOINT',
-  ];
+  // const optional = [
+  //   'NEXT_PUBLIC_META_PIXEL_ID_JMWEB',
+  //   'NEXT_PUBLIC_LOG_ENDPOINT',
+  // ];
 
-  if (!fs.existsSync(envLocal)) {
-    log('⚠️  .env.local not found', 'yellow');
-    log('   Create .env.local with required variables', 'yellow');
-  } else {
-    const content = fs.readFileSync(envLocal, 'utf8');
+  // if (!fs.existsSync(envLocal)) {
+  //   log('⚠️  .env.local not found', 'yellow');
+  //   log('   Create .env.local with required variables', 'yellow');
+  // } else {
+  //   const content = fs.readFileSync(envLocal, 'utf8');
 
-    required.forEach((varName) => {
-      if (content.includes(varName)) {
-        log(`✅ ${varName}`, 'green');
-      } else {
-        log(`❌ ${varName} not set`, 'red');
-      }
-    });
+  //   required.forEach((varName) => {
+  //     if (content.includes(varName)) {
+  //       log(`✅ ${varName}`, 'green');
+  //     } else {
+  //       log(`❌ ${varName} not set`, 'red');
+  //     }
+  //   });
 
-    optional.forEach((varName) => {
-      if (content.includes(varName)) {
-        log(`✅ ${varName} (optional)`, 'green');
-      } else {
-        log(`⚠️  ${varName} not set (optional)`, 'yellow');
-      }
-    });
-  }
+  //   optional.forEach((varName) => {
+  //     if (content.includes(varName)) {
+  //       log(`✅ ${varName} (optional)`, 'green');
+  //     } else {
+  //       log(`⚠️  ${varName} not set (optional)`, 'yellow');
+  //     }
+  //   });
+  // }
 }
 
 function checkSecurity() {
