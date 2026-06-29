@@ -56,10 +56,27 @@ const nextConfig: NextConfig = {
             key: "Permissions-Policy",
             value: "camera=(), microphone=(), geolocation=()",
           },
-          // HSTS - Force HTTPS (optional, uncomment if using HTTPS)
+          // HSTS - Force HTTPS on Vercel (production-ready)
           {
             key: "Strict-Transport-Security",
-            value: "max-age=31536000; includeSubDomains",
+            value: "max-age=31536000; includeSubDomains; preload",
+          },
+          // CORS headers - Restrict to domain
+          {
+            key: "Access-Control-Allow-Origin",
+            value: process.env.URL_DOMAIN_JMWEB || "https://yourdomain.com",
+          },
+          {
+            key: "Access-Control-Allow-Methods",
+            value: "GET, POST, PUT, DELETE, OPTIONS",
+          },
+          {
+            key: "Access-Control-Allow-Headers",
+            value: "Content-Type, Authorization, X-Requested-With",
+          },
+          {
+            key: "Access-Control-Allow-Credentials",
+            value: "true",
           },
         ],
       },

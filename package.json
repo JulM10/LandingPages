@@ -7,13 +7,16 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
-    "cache": "rm -rf .next"
+    "cache": "rm -rf .next",
+    "security-check": "node scripts/security-check.js",
+    "audit": "npm audit"
   },
   "dependencies": {
     "@next/third-parties": "16.2.9",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "@web3forms/react": "^1.1.3",
+    "dompurify": "^3.4.11",
     "framer-motion": "^12.40.0",
     "next": "16.2.9",
     "react": "19.2.7",
@@ -21,6 +24,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/dompurify": "^3.0.5",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

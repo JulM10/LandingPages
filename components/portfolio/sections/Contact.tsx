@@ -2,7 +2,13 @@
 
 import { useState, FormEvent, useEffect } from 'react';
 import { useAnalytics } from '@/lib/analytics';
+import { validateFormData, logSecurityEvent } from '@/lib/security';
 import type { PortfolioContactConfig } from '@/types/portfolio.config.types';
+
+interface FormError {
+  field: string;
+  message: string;
+}
 
 export function Contact({
   eyebrow,
@@ -18,6 +24,7 @@ export function Contact({
   const [informacion, setInformacion] = useState('');
   const [enviado, setEnviado] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState<FormError[]>([]);
 
   // Escuchar custom event cuando se clickea "Contactarse" desde servicios
   useEffect(() => {
@@ -32,6 +39,25 @@ export function Contact({
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
+    setErrors([]);
+
+    // Validar y sanitizar datos
+    const validation = validateFormData({
+      nombre,
+      telefono,
+      email,
+      informacion,
+    });
+
+    if (!validation.valid) {
+      setErrors(validation.errors);
+      logSecurityEvent('form_validation_failed', {
+        form: 'portfolio_contact',
+        errors: validation.errors,
+      });
+      setLoading(false);
+      return;
+    }
 
     const formData = new FormData(event.currentTarget);
     formData.append('access_key', process.env.NEXT_PUBLIC_WEB3FORMS_KEY_JMWEB!);
@@ -45,6 +71,10 @@ export function Contact({
       const data = await response.json();
       if (data.success) {
         trackFormSubmit('contact', { nombre, telefono, email, informacion });
+        logSecurityEvent('form_submitted', {
+          form: 'portfolio_contact',
+          timestamp: new Date().toISOString(),
+        });
         setEnviado(true);
         setNombre('');
         setTelefono('');
@@ -90,6 +120,20 @@ export function Contact({
 
         {/* Form Container */}
         <div className="w-full max-w-[1100px] mx-auto bg-light rounded-2xl p-6 sm:p-8 lg:p-12 border-2 border-gray-200 hover:border-primary transition-colors">
+          {/* Error Messages */}
+          {errors.length > 0 && (
+            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-sm font-bold text-red-800 mb-2">Errores en el formulario:</p>
+              <ul className="space-y-1">
+                {errors.map((error) => (
+                  <li key={error.field} className="text-sm text-red-700">
+                    • <strong>{error.field}:</strong> {error.message}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           <form onSubmit={onSubmit} className="space-y-6">
             {/* Nombre */}
             <div>

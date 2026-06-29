@@ -5,6 +5,10 @@ import Script from "next/script";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react";
 import { seoMetadata } from "@/config/client.config";
+import { initializeSecurityChecks } from "@/lib/env-check";
+
+// Initialize security checks (server-side only)
+initializeSecurityChecks();
 
 // Fuentes optimizadas por Next.js
 const inter = Inter({

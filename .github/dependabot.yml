@@ -1,0 +1,40 @@
+version: 2
+updates:
+  # npm dependency updates - daily at 03:00 UTC
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      time: "03:00"
+      timezone: "UTC"
+    reviewers:
+      - "juliomadero21"
+    allow:
+      - dependency-type: "all"
+    open-pull-requests-limit: 10
+    auto-rebase-and-update: true
+
+  # GitHub Actions updates - weekly on Monday
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "03:00"
+      timezone: "UTC"
+    reviewers:
+      - "juliomadero21"
+    open-pull-requests-limit: 5
+
+  # Security updates - always immediate
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    reviewers:
+      - "juliomadero21"
+    security-updates-only: true
+    ignore:
+      # Ignore dev dependencies in non-critical updates
+      - dependency-name: "@types/*"
+        update-types: ["version-update:semver-minor"]
