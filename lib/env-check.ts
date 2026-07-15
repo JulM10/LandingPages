@@ -76,7 +76,7 @@ export function validateEnvironmentVariables(): EnvValidationResult {
     // Type-specific validation
     switch (config.type) {
       case 'string':
-        if (value.length < (config.minLength || 1)) {
+        if ('minLength' in config && value.length < config.minLength) {
           errors.push(`${varName} is too short (minimum: ${config.minLength} characters)`);
         }
         break;
