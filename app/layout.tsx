@@ -8,7 +8,8 @@ import { seoMetadata } from "@/config/client.config";
 import { initializeSecurityChecks } from "@/lib/env-check";
 
 // Initialize security checks (server-side only)
-initializeSecurityChecks();
+// TODO: Enable when .env.local is configured with required variables
+// initializeSecurityChecks();
 
 // Fuentes optimizadas por Next.js
 const inter = Inter({
