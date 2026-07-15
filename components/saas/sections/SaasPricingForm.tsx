@@ -122,6 +122,7 @@ export function SaasPricingForm() {
             type="text"
             name="nombre"
             placeholder="Tu nombre"
+            autoComplete="name"
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
             required
@@ -147,6 +148,7 @@ export function SaasPricingForm() {
             type="email"
             name="email"
             placeholder="Tu email"
+            autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -172,6 +174,7 @@ export function SaasPricingForm() {
             type="text"
             name="empresa"
             placeholder="Tu empresa (opcional)"
+            autoComplete="off"
             value={empresa}
             onChange={(e) => setEmpresa(e.target.value)}
             style={{
@@ -196,6 +199,7 @@ export function SaasPricingForm() {
             name="descripcion"
             placeholder="¿Qué plan te interesa? (opcional)"
             value={descripcion}
+            autoComplete="off"
             onChange={(e) => setDescripcion(e.target.value)}
             style={{
               background: 'white',

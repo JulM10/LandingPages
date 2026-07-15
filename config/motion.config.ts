@@ -23,6 +23,7 @@ export const motionConfig: MotionConfig = {
     logoSrc: "/quanty_wordmark.svg",
     nombre: nombre,
     links: [
+      { label: "Inicio", href: "/"},
       { label: "Servicios", href: "#servicios" },
       { label: "Planes", href: "#planes" },
       { label: "Contacto", href: "#contacto" },

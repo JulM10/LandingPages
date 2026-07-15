@@ -17,6 +17,7 @@ export const saaExampleConfig: SaaSConfig = {
     logoSrc: '/quanty_wordmark.svg',
     nombre: 'SaaS Template',
     links: [
+      { label: "Inicio", href: "/"},
       { label: 'Features', href: '#features' },
       { label: 'Pricing', href: '#pricing' },
       { label: 'Docs', href: '#docs' },

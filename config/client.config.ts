@@ -21,9 +21,11 @@ export const clientConfig: ClientConfig = {
         logoSrc: "/quanty_wordmark.svg",
         nombre: nombre,
         links: [
+            { label: "Inicio", href: "/"},
             { label: "Servicios", href: "#servicios" },
             { label: "Planes", href: "#planes" },
-            { label: "Contacto", href: "#contacto" }],
+            { label: "Contacto", href: "#contacto" }
+        ],
         textButton: { label: "Solicitar información", href: "#contacto" }
     },
     hero: {

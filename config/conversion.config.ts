@@ -10,6 +10,7 @@ export const conversionConfig: ConversionConfig = {
     logoSrc: "/quanty_wordmark.svg",
     nombre: nombre,
     links: [
+      { label: "Inicio", href: "/"},
       { label: "Servicios", href: "#benefits" },
       { label: "Planes", href: "#plans" },
       { label: "Contacto", href: "#agenda" },

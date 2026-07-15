@@ -137,12 +137,14 @@ export function Contact({
           <form onSubmit={onSubmit} className="space-y-6">
             {/* Nombre */}
             <div>
-              <label className="block text-sm font-bold text-dark mb-2">
+              <label htmlFor="nombre" className="block text-sm font-bold text-dark mb-2">
                 {formFields.nombre}
               </label>
               <input
                 type="text"
                 name="nombre"
+                id="nombre"
+                autoComplete="name"
                 placeholder={formFields.nombre}
                 value={nombre}
                 onChange={(e) => setNombre(e.target.value)}
@@ -154,12 +156,14 @@ export function Contact({
             {/* Teléfono y Email */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-bold text-dark mb-2">
+                <label htmlFor="telefono" className="block text-sm font-bold text-dark mb-2">
                   {formFields.telefono}
                 </label>
                 <input
                   type="tel"
                   name="telefono"
+                  id="telefono"
+                  autoComplete="tel"
                   placeholder={formFields.telefono}
                   value={telefono}
                   onChange={(e) => setTelefono(e.target.value)}
@@ -168,12 +172,14 @@ export function Contact({
                 />
               </div>
               <div>
-                <label className="block text-sm font-bold text-dark mb-2">
+                <label htmlFor="email" className="block text-sm font-bold text-dark mb-2">
                   {formFields.email}
                 </label>
                 <input
                   type="email"
                   name="email"
+                  id="email"
+                  autoComplete="email"
                   placeholder={formFields.email}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -185,11 +191,13 @@ export function Contact({
 
             {/* Información adicional */}
             <div>
-              <label className="block text-sm font-bold text-dark mb-2">
+              <label htmlFor="informacion" className="block text-sm font-bold text-dark mb-2">
                 {formFields.informacion}
               </label>
               <textarea
                 name="informacion"
+                id="informacion"
+                autoComplete="off"
                 placeholder={formFields.informacion}
                 value={informacion}
                 onChange={(e) => setInformacion(e.target.value)}

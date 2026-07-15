@@ -1,20 +1,38 @@
 version: 2
 updates:
-  # npm dependency updates - daily at 03:00 UTC
+  # NPM Package Updates
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "daily"
       time: "03:00"
       timezone: "UTC"
+    open-pull-requests-limit: 10
     reviewers:
-      - "juliomadero21"
+      - "JulM10"
+    assignees:
+      - "JulM10"
+    commit-message:
+      prefix: "chore(deps):"
+      include: "scope"
+    pull-request-branch-name:
+      separator: "/"
+    labels:
+      - "dependencies"
+      - "automated"
     allow:
       - dependency-type: "all"
-    open-pull-requests-limit: 10
-    auto-rebase-and-update: true
+    ignore:
+      # Ignore major version updates for critical dependencies
+      # Review manually
+      - dependency-name: "next"
+        update-types:
+          - "version-update:semver-major"
+      - dependency-name: "react"
+        update-types:
+          - "version-update:semver-major"
 
-  # GitHub Actions updates - weekly on Monday
+  # GitHub Actions Updates
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
@@ -22,19 +40,14 @@ updates:
       day: "monday"
       time: "03:00"
       timezone: "UTC"
-    reviewers:
-      - "juliomadero21"
     open-pull-requests-limit: 5
-
-  # Security updates - always immediate
-  - package-ecosystem: "npm"
-    directory: "/"
-    schedule:
-      interval: "daily"
     reviewers:
-      - "juliomadero21"
-    security-updates-only: true
-    ignore:
-      # Ignore dev dependencies in non-critical updates
-      - dependency-name: "@types/*"
-        update-types: ["version-update:semver-minor"]
+      - "JulM10"
+    assignees:
+      - "JulM10"
+    commit-message:
+      prefix: "ci(actions):"
+      include: "scope"
+    labels:
+      - "ci"
+      - "automated"

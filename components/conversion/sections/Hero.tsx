@@ -101,6 +101,7 @@ export function Hero({ eyebrow, title, subtitle, highlight, bullets, form }: Con
                                 </label>
                                 <input
                                     name="empresa"
+                                    autoComplete="off"
                                     value={empresa}
                                     onChange={(e) => setEmpresa(e.target.value)}
                                     type="text"
@@ -116,6 +117,7 @@ export function Hero({ eyebrow, title, subtitle, highlight, bullets, form }: Con
                                 </label>
                                 <input
                                     name="contacto"
+                                    autoComplete="name"
                                     value={contacto}
                                     onChange={(e) => setContacto(e.target.value)}
                                     type="text"
@@ -131,6 +133,7 @@ export function Hero({ eyebrow, title, subtitle, highlight, bullets, form }: Con
                                 </label>
                                 <input
                                     name="email"
+                                    autoComplete="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     type="email"
@@ -167,6 +170,7 @@ export function Hero({ eyebrow, title, subtitle, highlight, bullets, form }: Con
                                 <textarea
                                     name="descripcion"
                                     value={descripcion}
+                                    autoComplete="off"
                                     onChange={(e) => setDescripcion(e.target.value)}
                                     id="descripcion"
                                     placeholder="Cuéntanos más sobre tu proyecto..."

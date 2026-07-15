@@ -27,6 +27,7 @@ export const portfolioConfig: PortfolioPageConfig = {
     logo: '/icon.png',
     siteName: nombre,
     navLinks: [
+      { label: "Inicio", href: "/"},
       { label: 'Proyectos', href: '#gallery' },
       { label: 'Servicios', href: '#services' },
       { label: 'Proceso', href: '#process' },
